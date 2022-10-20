@@ -31,6 +31,12 @@ class MioBandMod{
                         }
                     }
                 },
+                {
+                    "opcode": "colibration",
+                    "blockType": "hat",
+                    "text": "Запустить калибровку браслета",
+                },
+
             ],
             "menus": {//later
 
