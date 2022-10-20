@@ -72,7 +72,7 @@ class RJMTurtle {
     };
 }
 
-class RaspberryJamMod {
+class MioBandMod {
     constructor(runtime) {
         this.clear();
     }
@@ -87,7 +87,7 @@ class RaspberryJamMod {
 
     getInfo() {
         return {
-            "id": "RaspberryJamMod",
+            "id": "MioBandMod",
             "name": "Minecraft",
 
             "blocks": [{
@@ -1183,7 +1183,7 @@ class RaspberryJamMod {
 }
 
 (function() {
-    var extensionClass = RaspberryJamMod
+    var extensionClass = MioBandMod
     if (typeof window === "undefined" || !window.vm) {
         Scratch.extensions.register(new extensionClass())
     }
