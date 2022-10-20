@@ -9,7 +9,7 @@ class MioBandMod{
 
     getInfo() {
         return{
-            "id": "MioBand",
+            "id": "MioBandMod",
             "name": "MioBand",
             "blocks": [
                 {
