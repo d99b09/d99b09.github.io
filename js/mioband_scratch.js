@@ -36,6 +36,11 @@ class MioBandMod{
                     "blockType": "hat",
                     "text": "Запустить калибровку браслета",
                 },
+                {
+                    "opcode": "isslant",
+                    "blockType": "boolean",
+                    "text": "Есть наклон?",
+                },
 
             ],
             "menus": {//later
