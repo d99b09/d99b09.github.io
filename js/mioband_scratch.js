@@ -127,41 +127,6 @@ class MouseMod{
             "name": "MouseControl",
             "blocks": [
                 {
-                    "opcode": "hat",
-                    "blockType": "hat",
-                    "text": "Hat block",
-
-                    // "arguments": {
-                    //     "num1": {
-                    //         "type": "number",
-                    //         "defaultValue": "2"
-                    //     },
-                    //     "num2": {
-                    //         "type": "number",
-                    //         "defaultValue": "5"
-                    //     },
-                    //     "string": {
-                    //         "type": "string",
-                    //         "defaultValue": "hello world"
-                    //     }
-                    // }
-                },
-                {
-                    "opcode": "command",
-                    "blockType": "command",
-                    "text": "Stack block",
-                },
-                {
-                    "opcode": "reporter",
-                    "blockType": "reporter",
-                    "text": "Reporter block",
-                },
-                {
-                    "opcode": "Boolean",
-                    "blockType": "Boolean",
-                    "text": "Boolean block",
-                },
-                {
                     "opcode": "moveMouse",
                     "blockType": "command",
                     "text": "Двигать мышь [direction]",
