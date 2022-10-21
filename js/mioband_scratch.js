@@ -103,10 +103,66 @@ class MouseMod{
                     "blockType": "Boolean",
                     "text": "Boolean block",
                 },
+                {
+                    "opcode": "moveMouse",
+                    "blockType": "command",
+                    "text": "Двигать мышь [direction]",
+                    "arguments": {
+                        "direction": {
+                            "type": "string",
+                            "menu": "directionMenu"
+                        }
+                    }
+                },
+                {
+                    "opcode": "moveMouseBySpeed",
+                    "blockType": "command",
+                    "text": "Двигать мышь [axis] со скоростью [speed]",
+                    "arguments": {
+                        "axis": {
+                            "type": "string",
+                            "menu": "axisMenu"
+                        },
+                        "speed": {
+                            "type": "number",
+                            "defaultValue": "0"
+                        }
+                    }
+                },
+                {
+                    "opcode": "oneclick",
+                    "blockType": "command",
+                    "text": "Одиночный клик",
+                },
+                {
+                    "opcode": "twoclick",
+                    "blockType": "command",
+                    "text": "Двойной клик",
+                },
+                {
+                    "opcode": "press",
+                    "blockType": "command",
+                    "text": "Зажать клик",
+                },
+                {
+                    "opcode": "relese",
+                    "blockType": "command",
+                    "text": "Отжать клик",
+                },
+
 
             ],
-            "menus": {//later
-
+            "menus": {
+                "directionMenu": [
+                    "Вверх",
+                    "Вниз",
+                    "Влево",
+                    "Вправо"
+                ],
+                "axisMenu": [
+                    "Вертикаль",
+                    "Горизонталь"
+                ]
             }
         }
     }
