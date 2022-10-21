@@ -13,38 +13,107 @@ class MioBandMod{
             "name": "MioBand",
             "blocks": [
                 {
-                    "opcode": "substringy",
+                    "opcode": "usbport",
                     "blockType": "reporter",
-                    "text": "letters [num1] through [num2] of [string]",
+                    "text": "Порт USB-устройства"
+                },
+                {
+                    "opcode": "usbport",
+                    "blockType": "command",
+                    "text": "Подключиться к USB устройству на порту [port]",
                     "arguments": {
-                        "num1": {
-                            "type": "number",
-                            "defaultValue": "2"
-                        },
-                        "num2": {
-                            "type": "number",
-                            "defaultValue": "5"
-                        },
-                        "string": {
+                        "port": {
                             "type": "string",
-                            "defaultValue": "hello world"
+                            "defaultValue": ""
                         }
                     }
                 },
                 {
                     "opcode": "colibration",
-                    "blockType": "hat",
+                    "blockType": "command",
                     "text": "Запустить калибровку браслета",
                 },
                 {
                     "opcode": "isslant",
-                    "blockType": "boolean",
-                    "text": "Есть наклон?",
+                    "blockType": "Boolean",
+                    "text": "Есть наклон [direction]?",
+                    "arguments": {
+                        "direction": {
+                            "type": "string",
+                            "menu": "directionMenu"
+                        }
+                    }
                 },
-
+                {
+                    "opcode": "slantvalue",
+                    "blockType": "reporter",
+                    "text": "Степень наклона [axis]",
+                    "arguments": {
+                        "axis": {
+                            "type": "string",
+                            "menu": "axisMenu"
+                        },
+                    }
+                },
+                {
+                    "opcode": "isgesture",
+                    "blockType": "Boolean",
+                    "text": "Есть жест?"
+                },
+                {
+                    "opcode": "ifslant",
+                    "blockType": "command",
+                    "text": "Когда наклон",
+                },
+                {
+                    "opcode": "ifgesture",
+                    "blockType": "command",
+                    "text": "Когда жест",
+                },
+                {
+                    "opcode": "ifslant",
+                    "blockType": "command",
+                    "text": "Когда наклон [direction]?",
+                    "arguments": {
+                        "direction": {
+                            "type": "string",
+                            "menu": "directionMenu"
+                        }
+                    }
+                },
+                {
+                    "opcode": "ifgesture",
+                    "blockType": "hat",
+                    "text": "Когда жест",
+                },
+                {
+                    "opcode": "ifslant",
+                    "blockType": "hat",
+                    "text": "Когда наклон [direction]?",
+                    "arguments": {
+                        "direction": {
+                            "type": "string",
+                            "menu": "directionMenu"
+                        }
+                    }
+                },
+                {
+                    "opcode": "ifgesture",
+                    "blockType": "command",
+                    "text": "Когда жест",
+                },
             ],
-            "menus": {//later
-
+            "menus": {
+                "directionMenu": [
+                    "вверх",
+                    "вниз",
+                    "влево",
+                    "вправо"
+                ],
+                "axisMenu": [
+                    "Вертикаль",
+                    "Горизонталь"
+                ]
             }
         }
     }
@@ -110,6 +179,7 @@ class MouseMod{
                     "arguments": {
                         "direction": {
                             "type": "string",
+
                             "menu": "directionMenu"
                         }
                     }
