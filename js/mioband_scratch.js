@@ -18,7 +18,7 @@ class MioBandMod{
                     "text": "Порт USB-устройства"
                 },
                 {
-                    "opcode": "usbport",
+                    "opcode": "usbportconect",
                     "blockType": "command",
                     "text": "Подключиться к USB устройству на порту [port]",
                     "arguments": {
@@ -82,12 +82,12 @@ class MioBandMod{
                     }
                 },
                 {
-                    "opcode": "ifgesture",
+                    "opcode": "ifgestureh",
                     "blockType": "hat",
                     "text": "Когда жест",
                 },
                 {
-                    "opcode": "ifslant",
+                    "opcode": "ifslanth",
                     "blockType": "hat",
                     "text": "Когда наклон [direction]?",
                     "arguments": {
