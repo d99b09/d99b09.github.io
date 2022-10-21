@@ -23,8 +23,7 @@ class MioBandMod{
                     "text": "Подключиться к USB устройству на порту [port]",
                     "arguments": {
                         "port": {
-                            "type": "string",
-                            "defaultValue": ""
+                            "type": "string"
                         }
                     }
                 },
@@ -61,11 +60,6 @@ class MioBandMod{
                     "text": "Есть жест?"
                 },
                 {
-                    "opcode": "ifslant",
-                    "blockType": "command",
-                    "text": "Когда наклон",
-                },
-                {
                     "opcode": "ifgesture",
                     "blockType": "command",
                     "text": "Когда жест",
@@ -96,11 +90,6 @@ class MioBandMod{
                             "menu": "directionMenu"
                         }
                     }
-                },
-                {
-                    "opcode": "ifgesture",
-                    "blockType": "command",
-                    "text": "Когда жест",
                 },
             ],
             "menus": {
