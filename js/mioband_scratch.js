@@ -194,6 +194,16 @@ class MouseMod{
     substringy({num1, num2, string}) {
         return string.substring(num1 - 1, num2);
     };
+
+    ifgestureh(){
+        let i = 0;
+        console.log("Hello");
+        while (i < 20){
+            setTimeout(() => { console.log("World!"); }, 1000);
+        }
+        console.log("End");
+    }
+
 }
 
 (function() {
