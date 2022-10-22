@@ -108,13 +108,9 @@ class MioBandMod{
     }
 
     ifgestureh(){
-        let i = 0;
-        console.log("Hello");
-        while (i < 3){
-            setTimeout(() => { console.log("World!"); }, 1000);
-        }
-        console.log("End");
-        return True
+        let istrue = True
+
+        return {istrue}
     };
 
     substringy({num1, num2, string}) {
