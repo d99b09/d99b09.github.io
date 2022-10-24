@@ -10,7 +10,7 @@ class MioBandMod{
         this.socket = null;
         this.ip = 'localhost'
         this.port = 8000
-        this.req = new XMLHttpRequest()
+        // this.req = new XMLHttpRequest()
     }
 
     getInfo() {
