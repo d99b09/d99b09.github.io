@@ -131,19 +131,19 @@ class MioBandMod{
         let response = fetch(this.ip + this.port + '/mioband/')
         let json = response.then(response.ok.text())
         return {json}
-        }
-
     }
+
+
 
     ifgestureh(){
         let istrue = True
 
         return {istrue}
-    };
+    }
 
     substringy({num1, num2, string}) {
         return string.substring(num1 - 1, num2);
-    };
+    }
 }
 
 class MouseMod{
