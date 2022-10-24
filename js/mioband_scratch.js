@@ -129,7 +129,8 @@ class MioBandMod{
         // console.log(fetch(this.ip + this.port + '/mioband/').then(response => response.text()))
         // return fetch(this.ip + this.port + '/mioband/').then(response => response.text())
         let response = fetch(this.ip + this.port + '/mioband/')
-        return {response.status.text()}
+        let json = response.then(response.ok.text())
+        return {json}
         }
 
     }
