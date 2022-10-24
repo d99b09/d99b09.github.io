@@ -115,18 +115,18 @@ class MioBandMod{
     }
 
     miotestblock(){
-        // this.req.open('GET', this.ip + this.port + '/mioband/', false)
-        // this.req.send()
-        // this.req.onload = function () {
-        //     if (this.req.status !== 200){
-        //         alert('Error ${xhr.status}')
-        //     }
-        //     else{
-        //         alert(this.req.response)
-        //         return this.req.response
-        //     }
-        // }
-        return 1
+        this.req.open('GET', this.ip + this.port + '/mioband/', false)
+        this.req.send()
+        this.req.onload = function () {
+            if (this.req.status !== 200){
+                console.log('Error ${xhr.status}')
+            }
+            else{
+                console.log(this.req.response)
+                return this.req.response
+            }
+        }
+        return "1"
     }
 
     ifgestureh(){
