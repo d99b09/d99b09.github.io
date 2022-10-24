@@ -7,7 +7,7 @@ class MioBandMod{
         this.socket = null;
         this.ip = 'localhost'
         this.port = 8000
-        this.req = new XMLHttpRequest()
+        // this.req = new XMLHttpRequest()
     }
 
     getInfo() {
@@ -129,9 +129,7 @@ class MioBandMod{
         // console.log(fetch(this.ip + this.port + '/mioband/').then(response => response.text()))
         // return fetch(this.ip + this.port + '/mioband/').then(response => response.text())
         let response = fetch(this.ip + this.port + '/mioband/')
-        if (response.ok){
-            let json = response.json();
-            return {json}
+        return {response.status}
         }
 
     }
