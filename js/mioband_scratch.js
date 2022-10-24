@@ -1,6 +1,3 @@
-var xhr = XMLHttpRequest();
-
-
 class MioBandMod{
     constructor(runtime) {
         this.clear();
