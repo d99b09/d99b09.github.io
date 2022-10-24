@@ -126,11 +126,11 @@ class MioBandMod{
         //         return this.req.response
         //     }
         // }
-        // console.log(fetch(this.ip + this.port + '/mioband/').then(response => response.text()))
-        // return fetch(this.ip + this.port + '/mioband/').then(response => response.text())
-        let response = fetch(this.ip + this.port + '/mioband/')
-        let json = response.then(response.ok.text())
-        return {json}
+        console.log(fetch(this.ip + this.port + '/mioband/').then(response => response.text()))
+        return fetch(this.ip + this.port + '/mioband/').then(response => response.text())
+        // let response = fetch(this.ip + this.port + '/mioband/')
+        // let json = response.then(response.ok.text())
+        // return {json}
     }
 
 
