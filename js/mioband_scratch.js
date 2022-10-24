@@ -1,3 +1,6 @@
+var xhr = XMLHttpRequest();
+
+
 class MioBandMod{
     constructor(runtime) {
         this.clear();
@@ -5,13 +8,20 @@ class MioBandMod{
 
     clear() {
         this.socket = null;
+        this.ip = 'localhost'
+        this.port = 8000
+        this.req = new XMLHttpRequest()
     }
 
     getInfo() {
         return{
             "id": "MioBandMod",
             "name": "MioBand",
-            "blocks": [
+            "blocks": [{
+                    "opcode": "testblock",
+                    "blockType": "reporter",
+                    "text": "Тестовый блок",
+                },
                 {
                     "opcode": "usbport",
                     "blockType": "reporter",
@@ -107,6 +117,23 @@ class MioBandMod{
         }
     }
 
+    testblock(){
+        this.req.open('GET', this.ip + this.port + '/mioband/', false)
+        this.req.send()
+        this.req.onload = function () {
+            if (this.req.status !== 200){
+                alert('Error ${xhr.status}')
+            }
+            else{
+                alert(this.req.response)
+                return this.req.response
+            }
+
+        }
+
+
+    }
+
     ifgestureh(){
         let istrue = True
 
@@ -165,7 +192,7 @@ class MouseMod{
                     "text": "Одиночный клик",
                 },
                 {
-                    "opcode": "twoclick",
+                    "opcode": "dubleclick",
                     "blockType": "command",
                     "text": "Двойной клик",
                 },
