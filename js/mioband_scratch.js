@@ -15,7 +15,7 @@ class MioBandMod{
             "id": "MioBandMod",
             "name": "MioBand",
             "blocks": [{
-                    "opcode": "testblock",
+                    "opcode": "miotestblock",
                     "blockType": "reporter",
                     "text": "Тестовый блок",
                 },
@@ -114,19 +114,19 @@ class MioBandMod{
         }
     }
 
-    // testblock(){
-    //     this.req.open('GET', this.ip + this.port + '/mioband/', false)
-    //     this.req.send()
-    //     this.req.onload = function () {
-    //         if (this.req.status !== 200){
-    //             alert('Error ${xhr.status}')
-    //         }
-    //         else{
-    //             alert(this.req.response)
-    //             return this.req.response
-    //         }
-    //     }
-    // }
+    miotestblock(){
+        this.req.open('GET', this.ip + this.port + '/mioband/', false)
+        this.req.send()
+        this.req.onload = function () {
+            if (this.req.status !== 200){
+                alert('Error ${xhr.status}')
+            }
+            else{
+                alert(this.req.response)
+                return this.req.response
+            }
+        }
+    }
 
     ifgestureh(){
         let istrue = True
