@@ -5,7 +5,7 @@ class MioBandMod{
 
     clear() {
         this.socket = null;
-        this.ip = 'localhost'
+        this.ip = 'http//localhost'
         this.port = 8000
         // this.req = new XMLHttpRequest()
     }
