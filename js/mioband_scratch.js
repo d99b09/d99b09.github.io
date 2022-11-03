@@ -5,7 +5,7 @@ class MioBandMod{
 
     clear() {
         this.socket = null;
-        this.ip = 'http//localhost'
+        this.ip = 'localhost'
         this.port = 8000
         // this.req = new XMLHttpRequest()
     }
@@ -232,6 +232,7 @@ class MouseMod{
 }
 
 (function() {
+    console.log('hello')
     var extensionClass1 = MioBandMod
     var extensionClass2 = MouseMod
     if (typeof window === "undefined" || !window.vm) {
