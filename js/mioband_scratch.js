@@ -1,12 +1,79 @@
+console.log('hello')
+
+// String.prototype.hashCode = function() {
+//     var hash = 0;
+//     if (this.length == 0) {
+//         return hash;
+//     }
+//     for (var i = 0; i < this.length; i++) {
+//         var char = this.charCodeAt(i);
+//         hash = ((hash<<5)-hash)+char;
+//         hash = hash & hash; // Convert to 32bit integer
+//     }
+//     return hash;
+// }
+//
+// var WsCons = {};
+//
+// class MainWs{
+//     constructor(conname) {
+//         this.conname = conname;
+//         this.hash = this.conname.hashCode();
+//         if (this.hash in WsCons) {
+//             console.log("exists allready");
+//             return;
+//         }
+//         this.rxque = [];
+//         this.txresolve = 0;
+//         this.openresolve = 0;
+//         this._ws = new WebSocket(conname);
+//
+//
+//     }
+//     getdata(){//getdata from ws
+//
+//     }
+//      waitcon() {
+// 	var that = this;
+// 	if (this._ws.readyState == 0) {
+// 	    console.log("need startup promise");
+// 	    return new Promise((resolve, reject) => {
+// 		that.openresolve = resolve;
+// 		setTimeout(() => {
+// 		    console.log("stratup timeout");
+// 		    if (that.openresolve == 0)
+// 			return;
+// 		    console.log("stratup timeout failed");
+//
+// 		    that.openresolve = 0;
+// 		    resolve('timeout');
+// 		    that.close();
+// 		}, 2000);
+// 	    });
+// 	}
+// 	return this.hash;
+//     }
+// }
+
+class WsMain{
+    constructor() {
+        var socket = new WebSocket("ws://javascript.ru/ws");
+
+    }
+}
 class MioBandMod{
     constructor(runtime) {
         this.clear();
     }
 
     clear() {
-        this.socket = null;
-        this.ip = 'localhost'
-        this.port = 8000
+        this.msg = ''
+        this.socket = new WebSocket("ws://localhost:8765");
+        this.socket.onmessage = function (event){
+            this.msg = event.data
+        }
+        // this.ip = 'localhost'
+        // this.port = 8000
         // this.req = new XMLHttpRequest()
     }
 
@@ -126,8 +193,7 @@ class MioBandMod{
         //         return this.req.response
         //     }
         // }
-        console.log(fetch(this.ip + this.port + '/mioband/').then(response => response.text()))
-        return fetch(this.ip + this.port + '/mioband/').then(response => response.text())
+        return this.msg
         // let response = fetch(this.ip + this.port + '/mioband/')
         // let json = response.then(response.ok.text())
         // return {json}
