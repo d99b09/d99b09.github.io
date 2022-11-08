@@ -67,7 +67,7 @@ class MioBandMod{
     }
 
     clear() {
-        this.msg = ''
+        this.msg = 'o'
         this.socket = new WebSocket("ws://localhost:8765");
         this.socket.onmessage = function (event){
             this.msg = event.data
