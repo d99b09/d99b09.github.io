@@ -55,6 +55,8 @@ console.log('hello')
 //     }
 // }
 
+const mWebSocket = 'ws://127.0.0.1:8765';
+
 class WsMain{
     constructor() {
         var socket = new WebSocket("ws://javascript.ru/ws");
@@ -182,21 +184,8 @@ class MioBandMod{
     }
 
     miotestblock(){
-        // this.req.open('GET', this.ip + this.port + '/mioband/', false)
-        // this.req.send()
-        // this.req.onload = function () {
-        //     if (this.req.status !== 200){
-        //         console.log('Error ${xhr.status}')
-        //     }
-        //     else{
-        //         console.log(this.req.response)
-        //         return this.req.response
-        //     }
-        // }
         return this.msg
-        // let response = fetch(this.ip + this.port + '/mioband/')
-        // let json = response.then(response.ok.text())
-        // return {json}
+
     }
 
 

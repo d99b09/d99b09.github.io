@@ -1,14 +1,11 @@
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/mioband/getport")
-async def get_port():
-    return 'com3'
+import websockets
+from websockets import WebSocketServerProtocol
 
 
-@app.get("/mioband/")
-async def get_mioand_data():
-    return 'mioband'
+class Server:
+    def __init__(self):
+        self.ws = None
+
+    async def ws_handler(self, ws: WebSocketServerProtocol):
 
 
