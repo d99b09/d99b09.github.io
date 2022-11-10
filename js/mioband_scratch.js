@@ -61,9 +61,6 @@ class WsMain{
     constructor() {
         this.test_msg = ''
         websocket.onmessage = (...data) => {
-                var fieldNameElement = document.getElementById('wst');
-                fieldNameElement.innerHTML = data[0].data;
-                console.log(data[0].data)
                 this.test_msg = data[0].data
                 this.main_msg = JSON.parse(data[0].data)
 
@@ -75,9 +72,11 @@ class WsMain{
 class MioBandMod{
     constructor(runtime) {
         this.test_msg = ''
+        this.main_msg = null
         var socket = new WebSocket(mWebSocket);
-        socket.onmessage = ({ data }) => {
-            this.test_msg = data;
+        socket.onmessage = ( ...data ) => {
+            this.test_msg = data[0].data
+            this.main_msg = JSON.parse(data[0].data)
         }
         this.clear();
     }
@@ -124,7 +123,7 @@ class MioBandMod{
                 },
                 {
                     "opcode": "isslant",
-                    "blockType": "Boolean",
+                    "blockType": "reporter",
                     "text": "Есть наклон [direction]?",
                     "arguments": {
                         "direction": {
@@ -204,30 +203,33 @@ class MioBandMod{
 
     isslant(direction){
         console.log(direction)
-        if (direction === "вверх"){
-            return true
-        } else if (direction === "вниз"){
-            return true
-        } else if (direction === "влево"){
-            return true
-        } else if (direction === "вправо"){
-            return this
-        } else {
-            return false
+        // if (direction === "вверх"){
+        //     return true
+        // } else if (direction === "вниз"){
+        //     return true
+        // } else if (direction === "влево"){
+        //     return true
+        // } else if (direction === "вправо"){
+        //     return this
+        // } else {
+        //     return false
+        // }
+        return direction
+    }
+    isgesture(){
+        return this.msg === 1
+    }
+    slantvalue(axis){
+        if (axis === "Вертикаль"){
+            return this.main_msg.y
         }
-
-
-
-
+        else {return this.main_msg.x}
     }
 
 
 
-    ifgestureh(){
-        let istrue = True
 
-        return {istrue}
-    }
+
 
     substringy({num1, num2, string}) {
         return string.substring(num1 - 1, num2);
