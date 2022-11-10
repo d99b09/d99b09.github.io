@@ -74,14 +74,10 @@ class WsMain{
 class MioBandMod{
     constructor(runtime) {
         this.test_msg = ''
-        this.main_msg = null
-        websocket.onmessage = (...data) => {
-                var fieldNameElement = document.getElementById('wst');
-                fieldNameElement.innerHTML = data[0].data;
-                console.log(data[0].data)
-                this.test_msg = data[0].data
-                this.main_msg = JSON.parse(data[0].data)
-            };
+        var socket = new WebSocket(mWebSocket);
+        socket.onmessage = ({ data }) => {
+            this.test_msg = data;
+        }
         this.clear();
     }
 
@@ -206,15 +202,14 @@ class MioBandMod{
     }
 
     isslant(direction){
-        console.log(direction)
         if (direction === "вверх"){
-            return this.main_msg.y > 1
+            return this.main_msg
         } else if (direction === "вниз"){
-            return main_msg.y < 1
+            return true
         } else if (direction === "влево"){
-            return main_msg.x < 1
+            return true
         } else if (direction === "вправо"){
-            return main_msg.x > 1
+            return this
         } else {
             return false
         }
