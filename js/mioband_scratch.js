@@ -123,7 +123,7 @@ class MioBandMod{
                 },
                 {
                     "opcode": "isslant",
-                    "blockType": "reporter",
+                    "blockType": "Boolean",
                     "text": "Есть наклон [direction]?",
                     "arguments": {
                         "direction": {
@@ -203,21 +203,19 @@ class MioBandMod{
 
     isslant(direction){
         console.log(direction)
-        // if (direction === "вверх"){
-        //     return true
-        // } else if (direction === "вниз"){
-        //     return true
-        // } else if (direction === "влево"){
-        //     return true
-        // } else if (direction === "вправо"){
-        //     return this
-        // } else {
-        //     return false
-        // }
-        return direction
+        if (direction.direction === "вверх"){
+            return this.main_msg.y > 2
+        } else if (direction.direction === "вниз"){
+            return this.main_msg.y < 2
+        } else if (direction.direction === "влево"){
+            return this.main_msg.x < 2
+        } else if (direction.direction === "вправо"){
+            return this.main_msg.x > 2
+        }
+
     }
     isgesture(){
-        return this.msg === 1
+        return this.msg.s == 1
     }
     slantvalue(axis){
         if (axis === "Вертикаль"){

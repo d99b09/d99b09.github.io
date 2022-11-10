@@ -15,7 +15,7 @@ async def show_time(websocket):
         msg = json.dumps(message)
         print(msg)
         await websocket.send(msg)
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(2)
 
 async def main():
     async with websockets.serve(show_time, "localhost", 5678):
