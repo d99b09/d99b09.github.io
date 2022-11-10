@@ -60,13 +60,13 @@ const mWebSocket = 'ws://localhost:5678';
 class WsMain{
     constructor() {
         this.test_msg = ''
+        this.main_msg = null
         websocket.onmessage = (...data) => {
                 var fieldNameElement = document.getElementById('wst');
                 fieldNameElement.innerHTML = data[0].data;
                 console.log(data[0].data)
-                this.test_msg = JSON.parse(data[0].data)
-
-
+                this.test_msg = data[0].data
+                this.main_msg = JSON.parse(data[0].data)
             };
 
     }
@@ -74,10 +74,14 @@ class WsMain{
 class MioBandMod{
     constructor(runtime) {
         this.test_msg = ''
-        var socket = new WebSocket(mWebSocket);
-        socket.onmessage = ({ data }) => {
-            this.test_msg = data;
-        }
+        this.main_msg = null
+        websocket.onmessage = (...data) => {
+                var fieldNameElement = document.getElementById('wst');
+                fieldNameElement.innerHTML = data[0].data;
+                console.log(data[0].data)
+                this.test_msg = data[0].data
+                this.main_msg = JSON.parse(data[0].data)
+            };
         this.clear();
     }
 
@@ -202,13 +206,17 @@ class MioBandMod{
     }
 
     isslant(direction){
-        if (direction === "вверх"){
-            return true
-        } else if (direction === "вниз"){
-            return true
-        } else if (direction === "влево"){
-            return true
-        } else return direction === "вправо";
+        if (direction == "вверх"){
+            return this.main_msg.y > 1
+        } else if (direction == "вниз"){
+            return main_msg.y < 1
+        } else if (direction == "влево"){
+            return main_msg.x < 1
+        } else if (direction == "вправо"){
+            return main_msg.x > 1
+        } else {
+            return false
+        }
 
 
 
