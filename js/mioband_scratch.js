@@ -206,7 +206,7 @@ class MioBandMod{
     }
 
     isslant(direction){
-        console.log(direction)
+        // console.log(direction)
         if (direction == "вверх"){
             return this.main_msg.y > 1
         } else if (direction == "вниз"){
