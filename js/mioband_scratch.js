@@ -206,13 +206,14 @@ class MioBandMod{
     }
 
     isslant(direction){
-        if (direction == "вверх"){
+        console.log(direction)
+        if (direction === "вверх"){
             return this.main_msg.y > 1
-        } else if (direction == "вниз"){
+        } else if (direction === "вниз"){
             return main_msg.y < 1
-        } else if (direction == "влево"){
+        } else if (direction === "влево"){
             return main_msg.x < 1
-        } else if (direction == "вправо"){
+        } else if (direction === "вправо"){
             return main_msg.x > 1
         } else {
             return false
