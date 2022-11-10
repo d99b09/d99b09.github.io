@@ -215,7 +215,7 @@ class MioBandMod{
 
     }
     isgesture(){
-        return this.main_msg.s == 1
+        return this.main_msg.s === "1"
     }
     slantvalue(axis){
         if (axis.axis === "Вертикаль"){
@@ -223,15 +223,27 @@ class MioBandMod{
         }
         else {return this.main_msg.x}
     }
-
-
-
-
-
-
-    substringy({num1, num2, string}) {
-        return string.substring(num1 - 1, num2);
+    ifgesture(direction){
+        while (1){
+            if (direction.direction === "вверх"){
+                if (this.main_msg.y > 2){return}
+            } else if (direction.direction === "вниз"){
+                if (this.main_msg.y < -2){return}
+            } else if (direction.direction === "влево"){
+                if (this.main_msg.x < -2){return}
+            } else if (direction.direction === "вправо"){
+                if (this.main_msg.x > 2){return}
+        }
+        }
     }
+    ifslant(){
+        while (1){
+            if (this.main_msg.s === "1"){
+                return
+            }
+        }
+    }
+
 }
 
 class MouseMod{
