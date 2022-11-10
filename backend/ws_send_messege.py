@@ -11,7 +11,7 @@ async def show_time(websocket):
             i = 0
         else:
             i += 1
-        message = {'x': str(0), 'y': str(0), 's': str(i)}
+        message = {'x': str(0), 'y': str(3), 's': str(i)}
         msg = json.dumps(message)
         print(msg)
         await websocket.send(msg)
