@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>WebSocket demo</title>
+    </head>
+    <body>
+        <div id="wst">
+            "text"
+        </div>
+        <script>
+            const websocket = new WebSocket("ws://localhost:5678/");
+            websocket.onmessage = ({ data }) => {
+                var fieldNameElement = document.getElementById('wst');
+                fieldNameElement.innerHTML = data;
+
+            };
+        </script>
+    </body>
+</html>

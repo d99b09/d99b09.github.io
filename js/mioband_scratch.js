@@ -55,25 +55,35 @@ console.log('hello')
 //     }
 // }
 
-const mWebSocket = 'ws://127.0.0.1:8765';
+const mWebSocket = 'ws://localhost:5678';
 
 class WsMain{
     constructor() {
-        var socket = new WebSocket("ws://javascript.ru/ws");
+        this.test_msg = ''
+        var socket = new WebSocket(mWebSocket);
+        socket.onmessage = ({ data }) => {
+                this.test_msg = data;
+
+            };
 
     }
 }
 class MioBandMod{
     constructor(runtime) {
+        this.test_msg = ''
+        var socket = new WebSocket(mWebSocket);
+        socket.onmessage = ({ data }) => {
+            this.test_msg = data;
+        }
         this.clear();
     }
 
     clear() {
-        this.msg = 'o'
-        this.socket = new WebSocket("ws://localhost:8765");
-        this.socket.onmessage = function (event){
-            this.msg = event.data
-        }
+        // this.msg = 'o'
+        // this.socket = new WebSocket("ws://localhost:8765");
+        // this.socket.onmessage = function (event){
+        //     this.msg = event.data
+        // }
         // this.ip = 'localhost'
         // this.port = 8000
         // this.req = new XMLHttpRequest()
@@ -184,7 +194,7 @@ class MioBandMod{
     }
 
     miotestblock(){
-        return this.msg
+        return this.test_msg
 
     }
 
