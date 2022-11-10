@@ -206,19 +206,19 @@ class MioBandMod{
         if (direction.direction === "вверх"){
             return this.main_msg.y > 2
         } else if (direction.direction === "вниз"){
-            return this.main_msg.y < 2
+            return this.main_msg.y < -2
         } else if (direction.direction === "влево"){
-            return this.main_msg.x < 2
+            return this.main_msg.x < -2
         } else if (direction.direction === "вправо"){
             return this.main_msg.x > 2
         }
 
     }
     isgesture(){
-        return this.msg.s == 1
+        return this.main_msg.s == 1
     }
     slantvalue(axis){
-        if (axis === "Вертикаль"){
+        if (axis.axis === "Вертикаль"){
             return this.main_msg.y
         }
         else {return this.main_msg.x}
