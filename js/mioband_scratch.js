@@ -223,25 +223,22 @@ class MioBandMod{
         }
         else {return this.main_msg.x}
     }
-    ifgesture(direction){
-        while (1){
-            if (direction.direction === "вверх"){
-                if (this.main_msg.y > 2){return}
-            } else if (direction.direction === "вниз"){
-                if (this.main_msg.y < -2){return}
-            } else if (direction.direction === "влево"){
-                if (this.main_msg.x < -2){return}
-            } else if (direction.direction === "вправо"){
-                if (this.main_msg.x > 2){return}
+    ifgestureh(direction){
+        if (direction.direction === "вверх"){
+            if (this.main_msg.y > 2){return true}
+        } else if (direction.direction === "вниз"){
+            if (this.main_msg.y < -2){return true}
+        } else if (direction.direction === "влево"){
+            if (this.main_msg.x < -2){return true}
+        } else if (direction.direction === "вправо"){
+            if (this.main_msg.x > 2){return true}
         }
-        }
+        return false
+
     }
-    ifslant(){
-        while (1){
-            if (this.main_msg.s === "1"){
-                return
-            }
-        }
+    ifslanth(){
+        return this.main_msg.s === "1";
+
     }
 
 }
