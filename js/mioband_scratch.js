@@ -60,13 +60,14 @@ const mWebSocket = 'ws://localhost:5678';
 class WsMain{
     constructor() {
         this.test_msg = ''
-        this.main_msg = null
         websocket.onmessage = (...data) => {
                 var fieldNameElement = document.getElementById('wst');
                 fieldNameElement.innerHTML = data[0].data;
                 console.log(data[0].data)
                 this.test_msg = data[0].data
                 this.main_msg = JSON.parse(data[0].data)
+
+
             };
 
     }
@@ -203,7 +204,7 @@ class MioBandMod{
 
     isslant(direction){
         if (direction === "вверх"){
-            return this.main_msg
+            return true
         } else if (direction === "вниз"){
             return true
         } else if (direction === "влево"){
