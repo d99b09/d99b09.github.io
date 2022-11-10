@@ -2,6 +2,7 @@ import asyncio
 import datetime
 import random
 import websockets
+import json
 
 async def show_time(websocket):
     i = 1
@@ -9,11 +10,12 @@ async def show_time(websocket):
         if i == 1:
             i = 0
         else:
-            i = 1
-        message = f'Hello word!{i}'
-        print(message)
-        await websocket.send(message)
-        await asyncio.sleep(random.random() * 5)
+            i += 1
+        message = {'x': str(0), 'y': str(0), 's': str(i)}
+        msg = json.dumps(message)
+        print(msg)
+        await websocket.send(msg)
+        await asyncio.sleep(0.5)
 
 async def main():
     async with websockets.serve(show_time, "localhost", 5678):

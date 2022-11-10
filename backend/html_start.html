@@ -9,9 +9,17 @@
         </div>
         <script>
             const websocket = new WebSocket("ws://localhost:5678/");
-            websocket.onmessage = ({ data }) => {
+            websocket.onmessage = (...data) => {
                 var fieldNameElement = document.getElementById('wst');
-                fieldNameElement.innerHTML = data;
+                fieldNameElement.innerHTML = data[0].data;
+                console.log(data[0].data)
+                var d = JSON.parse(data[0].data)
+                console.log(d)
+                console.log(d.x)
+                console.log(d.y)
+                console.log(d.s)
+
+
 
             };
         </script>
