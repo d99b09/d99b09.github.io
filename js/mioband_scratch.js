@@ -44,7 +44,7 @@ class MioBandMod{
         if (this.runtime.currentMSecs == this.currentMSecs)
             return // not a new polling cycle
         this.currentMSecs = this.runtime.currentMSecs
-        // this.ifslant_V = (this.main_msg.s === "1")
+        this.ifslant_V = (this.main_msg.s === "1")
 
     }
 
@@ -193,10 +193,16 @@ class MioBandMod{
 
     }
     ifslanth(){
-        this.update()
-        // return this.ifslant_V;
-        console.log(this.main_msg.s === "1")
-        return this.main_msg.s === "1"
+        console.log("Hello");
+        sleep(2000)
+            .then(() => { console.log("World!"); })
+            .then(() => {
+                sleep(2000)
+                    .then(() => { console.log("Goodbye!"); })
+            });
+        return true
+
+        // return this.main_msg.s === "1";
 
     }
 
@@ -289,22 +295,16 @@ class MouseMod{
 
 (function() {
     console.log('hello')
-    // var extensionClass1 = MioBandMod
-    // var extensionClass2 = MouseMod
-    // if (typeof window === "undefined" || !window.vm) {
-    //     Scratch.extensions.register(new extensionClass1())
-    //     Scratch.extensions.register(new extensionClass2())
-    //
-    // }
-    // else {
-    //     var extensionInstance = new extensionClass(window.vm.extensionManager.runtime)
-    //     var serviceName = window.vm.extensionManager._registerInternalExtension(extensionInstance)
-    //     window.vm.extensionManager._loadedExtensions.set(extensionInstance.getInfo().id, serviceName)
-    // }
-    var extensionMioBandMod = new MioBandMod(window.vm.extensionManager.runtime)
-    // var extensionMouseMod = MouseMod
-    // Scratch.extensions.register(new extensionMouseMod())
-    var serviceName = window.vm.extensionManager._registerInternalExtension(extensionMioBandMod)
-    window.vm.extensionManager._loadedExtensions.set(extensionMioBandMod.getInfo().id, serviceName)
+    var extensionClass1 = MioBandMod
+    var extensionClass2 = MouseMod
+    if (typeof window === "undefined" || !window.vm) {
+        Scratch.extensions.register(new extensionClass1())
+        Scratch.extensions.register(new extensionClass2())
 
+    }
+    else {
+        var extensionInstance = new extensionClass(window.vm.extensionManager.runtime)
+        var serviceName = window.vm.extensionManager._registerInternalExtension(extensionInstance)
+        window.vm.extensionManager._loadedExtensions.set(extensionInstance.getInfo().id, serviceName)
+    }
 })()
