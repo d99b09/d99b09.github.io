@@ -17,6 +17,7 @@ class WsMain{
 }
 class MioBandMod{
     constructor(runtime) {
+        this.ifslant_V = false
         this.runtime = runtime
         this.test_msg = ''
         this.main_msg = null
@@ -37,6 +38,14 @@ class MioBandMod{
         // this.ip = 'localhost'
         // this.port = 8000
         // this.req = new XMLHttpRequest()
+    }
+
+    update() {
+        if (this.runtime.currentMSecs == this.currentMSecs)
+            return // not a new polling cycle
+        this.currentMSecs = this.runtime.currentMSecs
+        this.ifslant_V = (this.main_msg.s === "1")
+
     }
 
     getInfo() {
@@ -184,7 +193,8 @@ class MioBandMod{
 
     }
     ifslanth(){
-        return this.main_msg.s === "1";
+        this.update()
+        return this.ifslant_V;
 
     }
 
