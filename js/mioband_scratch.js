@@ -287,16 +287,22 @@ class MouseMod{
 
 (function() {
     console.log('hello')
-    var extensionClass1 = MioBandMod
-    var extensionClass2 = MouseMod
-    if (typeof window === "undefined" || !window.vm) {
-        Scratch.extensions.register(new extensionClass1())
-        Scratch.extensions.register(new extensionClass2())
+    // var extensionClass1 = MioBandMod
+    // var extensionClass2 = MouseMod
+    // if (typeof window === "undefined" || !window.vm) {
+    //     Scratch.extensions.register(new extensionClass1())
+    //     Scratch.extensions.register(new extensionClass2())
+    //
+    // }
+    // else {
+    //     var extensionInstance = new extensionClass(window.vm.extensionManager.runtime)
+    //     var serviceName = window.vm.extensionManager._registerInternalExtension(extensionInstance)
+    //     window.vm.extensionManager._loadedExtensions.set(extensionInstance.getInfo().id, serviceName)
+    // }
+    var extensionMioBandMod = new MioBandMod(window.vm.extensionManager.runtime)
+    // var extensionMouseMod = MouseMod
+    // Scratch.extensions.register(new extensionMouseMod())
+    var serviceName = window.vm.extensionManager._registerInternalExtension(extensionMioBandMod)
+    window.vm.extensionManager._loadedExtensions.set(extensionMioBandMod.getInfo().id, serviceName)
 
-    }
-    else {
-        var extensionInstance = new extensionClass(window.vm.extensionManager.runtime)
-        var serviceName = window.vm.extensionManager._registerInternalExtension(extensionInstance)
-        window.vm.extensionManager._loadedExtensions.set(extensionInstance.getInfo().id, serviceName)
-    }
 })()
