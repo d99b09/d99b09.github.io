@@ -44,7 +44,7 @@ class MioBandMod{
         if (this.runtime.currentMSecs == this.currentMSecs)
             return // not a new polling cycle
         this.currentMSecs = this.runtime.currentMSecs
-        this.ifslant_V = (this.main_msg.s === "1")
+        // this.ifslant_V = (this.main_msg.s === "1")
 
     }
 
@@ -194,7 +194,8 @@ class MioBandMod{
     }
     ifslanth(){
         // this.update()
-        return this.ifslant_V;
+        // return this.ifslant_V;
+        return this.main_msg.s === "1"
 
     }
 
