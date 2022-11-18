@@ -193,8 +193,9 @@ class MioBandMod{
 
     }
     ifslanth(){
-        // this.update()
+        this.update()
         // return this.ifslant_V;
+        console.log(this.main_msg.s === "1")
         return this.main_msg.s === "1"
 
     }
