@@ -53,9 +53,9 @@ class MioBandMod{
             "id": "MioBandMod",
             "name": "MioBand",
             "blocks": [{
-                    "opcode": "miotestblock",
+                    "opcode": "miobandstate",
                     "blockType": "reporter",
-                    "text": "Тестовый блок",
+                    "text": "Состояние браслета",
                 },
                 {
                     "opcode": "usbport",
@@ -152,7 +152,7 @@ class MioBandMod{
         }
     }
 
-    miotestblock(){
+    miobandstate(){
         return this.test_msg
 
     }

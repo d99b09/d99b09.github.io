@@ -3,18 +3,6 @@ console.log('hello')
 
 const mWebSocket = 'ws://localhost:5678';
 
-class WsMain{
-    constructor() {
-        this.test_msg = ''
-        websocket.onmessage = (...data) => {
-                this.test_msg = data[0].data
-                this.main_msg = JSON.parse(data[0].data)
-
-
-            };
-
-    }
-}
 class MioBandMod{
     constructor(runtime) {
         this.ifslant_V = false
@@ -34,9 +22,9 @@ class MioBandMod{
             "id": "MioBandMod",
             "name": "MioBand",
             "blocks": [{
-                    "opcode": "miotestblock",
+                    "opcode": "miobandstate",
                     "blockType": "reporter",
-                    "text": "Тестовый блок",
+                    "text": "Состояние браслета",
                 },
                 {
                     "opcode": "isslant",
@@ -65,6 +53,11 @@ class MioBandMod{
                     "blockType": "Boolean",
                     "text": "Есть жест?"
                 },
+                {
+                    "opcode": "miobandtest",
+                    "blockType": "command",
+                    "text": "Тестовый блок",
+                }
 
             ],
             "menus": {
@@ -82,7 +75,7 @@ class MioBandMod{
         }
     }
 
-    miotestblock(){
+    miobandstate(){
         return this.test_msg
 
     }
@@ -108,6 +101,11 @@ class MioBandMod{
             return this.main_msg.y
         }
         else {return this.main_msg.x}
+    }
+    async miobandtest() {
+        const url = new URL("http://127.0.0.1:5000/")
+
+        let response = await fetch(url);
     }
 
 
