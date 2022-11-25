@@ -19,7 +19,13 @@
             //     console.log(d.y)
             //     console.log(d.s)
             //     console.log(1 == "1")
+
+            const url = new URL("http://127.0.0.1:5000/")
+            console.log(fetch(url).then(response => response.text()))
+
+
             let resp = fetch('http://127.0.0.1:5000/')
+            console.log(resp)
             var fieldNameElement = document.getElementById('wst');
             //     fieldNameElement.innerHTML = data[0].data;
             // console.log(resp)

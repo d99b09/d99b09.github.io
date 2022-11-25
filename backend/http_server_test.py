@@ -10,6 +10,7 @@ CORS(app)
 class asyncTest:
     def __init__(self, app):
         self.app = app
+        self.j = 0
     async def counter(self):
         while True:
             for i in range(10):
@@ -33,4 +34,4 @@ def index2():
 
 if __name__ == '__main__':
     aT = asyncTest(app)
-    asyncio.run(aT.main())
+    asyncio.run(aT.start_app())
