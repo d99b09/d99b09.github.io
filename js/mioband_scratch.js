@@ -136,6 +136,11 @@ class MioBandMod{
                         }
                     }
                 },
+                {
+                    "opcose": "miobandtest",
+                    "blockType": "reporter",
+                    "text": "Тестовый блок",
+                },
             ],
             "menus": {
                 "directionMenu": [
@@ -205,6 +210,12 @@ class MioBandMod{
         // return this.main_msg.s === "1";
 
     }
+    miobandtest(){
+        const url = new URL("http://127.0.0.1:5000/")
+        return fetch(url).then(response => response.text())
+
+    }
+
 
 }
 

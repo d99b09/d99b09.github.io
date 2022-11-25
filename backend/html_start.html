@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>WebSocket demo</title>
+        <title>Fetch demo</title>
     </head>
     <body>
         <div id="wst">
             "text"
         </div>
         <script>
-            const websocket = new WebSocket("ws://localhost:5678/");
-            websocket.onmessage = (...data) => {
-                var fieldNameElement = document.getElementById('wst');
-                fieldNameElement.innerHTML = data[0].data;
-                console.log(data[0].data)
-                var d = JSON.parse(data[0].data)
-                console.log(d)
-                console.log(d.x)
-                console.log(d.y)
-                console.log(d.s)
-                console.log(1 == "1")
+            // const websocket = new WebSocket("ws://localhost:5678/");
+            // websocket.onmessage = (...data) => {
+            //     var fieldNameElement = document.getElementById('wst');
+            //     fieldNameElement.innerHTML = data[0].data;
+            //     console.log(data[0].data)
+            //     var d = JSON.parse(data[0].data)
+            //     console.log(d)
+            //     console.log(d.x)
+            //     console.log(d.y)
+            //     console.log(d.s)
+            //     console.log(1 == "1")
+            let resp = fetch('http://127.0.0.1:5000/')
+            var fieldNameElement = document.getElementById('wst');
+            //     fieldNameElement.innerHTML = data[0].data;
+            // console.log(resp)
 
-
-
-            };
         </script>
     </body>
 </html>
