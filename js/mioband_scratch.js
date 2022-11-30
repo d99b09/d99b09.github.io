@@ -163,7 +163,7 @@ class MioBandMod{
     }
 
     usbportconect(port){
-        const url = new URL("http://127.0.0.1:5000/set_port/" + port + '/')
+        const url = new URL("http://127.0.0.1:5000/set_port/" + port.port + '/')
         return fetch(url).then(response => response.text())
     }
 
@@ -315,15 +315,15 @@ class MouseMod{
     }
 
     moveMouse(direction){
-        if (direction.direction === "Вверх"){
-            const url = new URL("http://127.0.0.1:5000/move_mouse/up/")
-        } else if (direction.direction === "Вниз"){
-            const url = new URL("http://127.0.0.1:5000/move_mouse/down/")
-        } else if (direction.direction === "Влево"){
-            const url = new URL("http://127.0.0.1:5000/move_mouse/left/")
-        } else if (direction.direction === "Вправо"){
-            const url = new URL("http://127.0.0.1:5000/move_mouse/right/")
-        }
+        // if (direction.direction === "Вверх"){
+        //     const url = new URL("http://127.0.0.1:5000/move_mouse/up/")
+        // } else if (direction.direction === "Вниз"){
+        //     const url = new URL("http://127.0.0.1:5000/move_mouse/down/")
+        // } else if (direction.direction === "Влево"){
+        //     const url = new URL("http://127.0.0.1:5000/move_mouse/left/")
+        // } else if (direction.direction === "Вправо"){
+        //     const url = new URL("http://127.0.0.1:5000/move_mouse/right/")
+        // }
         const url = new URL("http://127.0.0.1:5000/move_mouse/right/")
         return fetch(url).then(response => response.text())
 
