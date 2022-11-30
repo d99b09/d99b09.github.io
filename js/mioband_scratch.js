@@ -331,7 +331,7 @@ class MouseMod{
         console.log(side)
 
         const url = new URL("http://127.0.0.1:5000/move_mouse/" + side)
-        return direction.direction
+        return fetch(url).then(response => response.text())
 
     }
     moveMoBySpeed(axis){
