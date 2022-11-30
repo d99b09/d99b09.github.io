@@ -315,6 +315,9 @@ class MouseMod{
     }
 
     moveMo(direction){
+        console.log(direction)
+        console.log(direction.direction)
+
         var side = ""
         if (direction.direction === "Вверх"){
             var side = "up/"
@@ -325,6 +328,7 @@ class MouseMod{
         } else {
             var side = "right/"
         }
+        console.log(side)
 
         const url = new URL("http://127.0.0.1:5000/move_mouse/" + side)
         return direction.direction
