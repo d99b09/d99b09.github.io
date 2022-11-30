@@ -325,6 +325,7 @@ class MouseMod{
             const url = new URL("http://127.0.0.1:5000/move_mouse/right/")
         }
         fetch(url).then(response => response.text())
+        return direction.direction
 
     }
     moveMouseBySpeed(axis, speed){
@@ -339,7 +340,7 @@ class MouseMod{
 
     oneclick(){
         const url = new URL("http://127.0.0.1:5000/one_click/")
-        return fetch(url).then(response => response.text())
+        fetch(url).then(response => response.text())
     }
 
     dubleclick(){
