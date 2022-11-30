@@ -315,25 +315,25 @@ class MouseMod{
     }
 
     moveMouse(direction){
-        if (direction.direction === "вверх"){
+        if (direction.direction === "Вверх"){
             const url = new URL("http://127.0.0.1:5000/move_mouse/up/")
-        } else if (direction.direction === "вниз"){
+        } else if (direction.direction === "Вниз"){
             const url = new URL("http://127.0.0.1:5000/move_mouse/down/")
-        } else if (direction.direction === "влево"){
+        } else if (direction.direction === "Влево"){
             const url = new URL("http://127.0.0.1:5000/move_mouse/left/")
-        } else if (direction.direction === "вправо"){
+        } else if (direction.direction === "Вправо"){
             const url = new URL("http://127.0.0.1:5000/move_mouse/right/")
         }
         fetch(url).then(response => response.text())
         return direction.direction
 
     }
-    moveMouseBySpeed(axis, speed){
+    moveMouseBySpeed(axis){
         if (axis.axis === "Вертикаль"){
-            const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/up/"+ speed + "/")
+            const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/up/"+ axis.speed + "/")
         }
         else {
-            const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/right/"+ speed + "/")
+            const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/right/"+ axis.speed + "/")
         }
         fetch(url).then(response => response.text())
     }
