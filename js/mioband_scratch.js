@@ -324,7 +324,7 @@ class MouseMod{
         } else if (direction.direction === "Вправо"){
             const url = new URL("http://127.0.0.1:5000/move_mouse/right/")
         }
-        fetch(url).then(response => response.text())
+        // fetch(url).then(response => response.text())
         return direction.direction
 
     }

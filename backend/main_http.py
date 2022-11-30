@@ -75,7 +75,7 @@ def move_mouse_right():
 
 @app.route('/move_mouse_by_speed/up/<speed>/')
 def move_mouse_up_by_speed(speed):
-    mouse.y = -int(speed)
+    mouse.y = int(speed)
     mouse.rotation_by_speed()
     return 'OK'
 
@@ -89,7 +89,7 @@ def move_mouse_down_by_speed(speed):
 
 @app.route('/move_mouse_by_speed/left/<speed>/')
 def move_mouse_left_by_speed(speed):
-    mouse.x = -int(speed)
+    mouse.x = int(speed)
     mouse.rotation_by_speed()
     return 'OK'
 
