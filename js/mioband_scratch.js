@@ -60,7 +60,7 @@ class MioBandMod{
                 {
                     "opcode": "usbport",
                     "blockType": "reporter",
-                    "text": "Порт USB-устройства"
+                    "text": "Порты"
                 },
                 {
                     "opcode": "usbportconect",
@@ -157,6 +157,11 @@ class MioBandMod{
         }
     }
 
+    usbport(){
+        const url = new URL("http://127.0.0.1:5000/ports/")
+        return fetch(url).then(response => response.text())
+    }
+
     miobandstate(){
         return this.test_msg
 
@@ -165,13 +170,13 @@ class MioBandMod{
     isslant(direction){
         console.log(direction)
         if (direction.direction === "вверх"){
-            return this.main_msg.y > 2
+            return this.main_msg.y > 100
         } else if (direction.direction === "вниз"){
-            return this.main_msg.y < -2
+            return this.main_msg.y < -100
         } else if (direction.direction === "влево"){
-            return this.main_msg.x < -2
+            return this.main_msg.x < -100
         } else if (direction.direction === "вправо"){
-            return this.main_msg.x > 2
+            return this.main_msg.x > 100
         }
 
     }
@@ -186,13 +191,13 @@ class MioBandMod{
     }
     ifgestureh(direction){
         if (direction.direction === "вверх"){
-            if (this.main_msg.y > 2){return true}
+            if (this.main_msg.y > 100){return true}
         } else if (direction.direction === "вниз"){
-            if (this.main_msg.y < -2){return true}
+            if (this.main_msg.y < -100){return true}
         } else if (direction.direction === "влево"){
-            if (this.main_msg.x < -2){return true}
+            if (this.main_msg.x < -100){return true}
         } else if (direction.direction === "вправо"){
-            if (this.main_msg.x > 2){return true}
+            if (this.main_msg.x > 100){return true}
         }
         return false
 
