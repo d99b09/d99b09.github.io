@@ -162,6 +162,11 @@ class MioBandMod{
         return fetch(url).then(response => response.text())
     }
 
+    usbportconect(port){
+        const url = new URL("http://127.0.0.1:5000/set_port/" + port + '/')
+        return fetch(url).then(response => response.text())
+    }
+
     miobandstate(){
         return this.test_msg
 
@@ -281,7 +286,7 @@ class MouseMod{
                     "text": "Зажать клик",
                 },
                 {
-                    "opcode": "relese",
+                    "opcode": "release",
                     "blockType": "command",
                     "text": "Отжать клик",
                 },
@@ -303,9 +308,48 @@ class MouseMod{
         }
     }
 
-    substringy({num1, num2, string}) {
-        return string.substring(num1 - 1, num2);
-    };
+    moveMouse(direction){
+        if (direction.direction === "вверх"){
+            const url = new URL("http://127.0.0.1:5000/move_mouse/up/")
+        } else if (direction.direction === "вниз"){
+            const url = new URL("http://127.0.0.1:5000/move_mouse/down/")
+        } else if (direction.direction === "влево"){
+            const url = new URL("http://127.0.0.1:5000/move_mouse/left/")
+        } else if (direction.direction === "вправо"){
+            const url = new URL("http://127.0.0.1:5000/move_mouse/right/")
+        }
+        fetch(url).then(response => response.text())
+
+    }
+    moveMouseBySpeed(axis, speed){
+        if (axis.axis === "Вертикаль"){
+            const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/up/"+ speed + "/")
+        }
+        else {
+            const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/right/"+ speed + "/")
+        }
+        fetch(url).then(response => response.text())
+    }
+
+    oneclick(){
+        const url = new URL("http://127.0.0.1:5000/one_click/")
+        return fetch(url).then(response => response.text())
+    }
+
+    dubleclick(){
+        const url = new URL("http://127.0.0.1:5000/two_click/")
+        return fetch(url).then(response => response.text())
+    }
+
+    press(){
+        const url = new URL("http://127.0.0.1:5000/press/")
+        return fetch(url).then(response => response.text())
+    }
+
+    release(){
+        const url = new URL("http://127.0.0.1:5000/release/")
+        return fetch(url).then(response => response.text())
+    }
 
 }
 
