@@ -18,6 +18,7 @@ def test():
 
 @app.route('/set_port/<com>')
 def port_connect(com):
+    print(com)
     mouse.port = com
     return 'OK'
 
@@ -47,28 +48,28 @@ def move_mouse_stop():
 
 @app.route('/move_mouse/up/')
 def move_mouse_up():
-    mouse.y = -500
+    mouse.y = -200
     mouse.rotation_by_speed()
     return 'OK'
 
 
 @app.route('/move_mouse/down/')
 def move_mouse_down():
-    mouse.y = 500
+    mouse.y = 200
     mouse.rotation_by_speed()
     return 'OK'
 
 
 @app.route('/move_mouse/left/')
 def move_mouse_left():
-    mouse.x = -500
+    mouse.x = -200
     mouse.rotation_by_speed()
     return 'OK'
 
 
 @app.route('/move_mouse/right/')
 def move_mouse_right():
-    mouse.x = 500
+    mouse.x = 200
     mouse.rotation_by_speed()
     return 'OK'
 

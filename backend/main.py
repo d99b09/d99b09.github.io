@@ -44,9 +44,9 @@ class WS_app:
     async def header(self, websocket):
         while True:
             try:
-                url = 'http://127.0.0.1:5000/port/'
-                r = requests.get(url)
-                self.ser.port = r.text
+                # url = 'http://127.0.0.1:5000/port/'
+                # r = requests.get(url)
+                # self.ser.port = r.text
                 print(f'Trying to open port {self.ser.port}')
                 self.ser.open()
                 line = self.ser.readline()

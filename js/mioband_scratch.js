@@ -244,7 +244,7 @@ class MouseMod{
             "name": "MouseControl",
             "blocks": [
                 {
-                    "opcode": "moveMouse",
+                    "opcode": "moveMo",
                     "blockType": "command",
                     "text": "Двигать мышь [direction]",
                     "arguments": {
@@ -256,7 +256,7 @@ class MouseMod{
                     }
                 },
                 {
-                    "opcode": "moveMouseBySpeed",
+                    "opcode": "moveMoBySpeed",
                     "blockType": "command",
                     "text": "Двигать мышь [axis] со скоростью [speed]",
                     "arguments": {
@@ -314,21 +314,23 @@ class MouseMod{
         }
     }
 
-    moveMouse(direction){
-        // if (direction.direction === "Вверх"){
-        //     const url = new URL("http://127.0.0.1:5000/move_mouse/up/")
-        // } else if (direction.direction === "Вниз"){
-        //     const url = new URL("http://127.0.0.1:5000/move_mouse/down/")
-        // } else if (direction.direction === "Влево"){
-        //     const url = new URL("http://127.0.0.1:5000/move_mouse/left/")
-        // } else if (direction.direction === "Вправо"){
-        //     const url = new URL("http://127.0.0.1:5000/move_mouse/right/")
-        // }
-        const url = new URL("http://127.0.0.1:5000/move_mouse/right/")
+    moveMo(direction){
+        var side = ""
+        if (direction.direction === "Вверх"){
+            var side = "up/"
+        } else if (direction.direction === "Вниз"){
+            var side = "down/"
+        } else if (direction.direction === "Влево"){
+            var side = "left/"
+        } else {
+            var side = "right/"
+        }
+
+        const url = new URL("http://127.0.0.1:5000/move_mouse/" + side)
         return fetch(url).then(response => response.text())
 
     }
-    moveMouseBySpeed(axis){
+    moveMoBySpeed(axis){
         if (axis.axis === "Вертикаль"){
             const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/up/"+ axis.speed + "/")
         }
