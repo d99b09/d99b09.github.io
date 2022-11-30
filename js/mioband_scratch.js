@@ -319,11 +319,11 @@ class MouseMod{
         console.log(direction.direction)
 
         var side = ""
-        if (direction.direction === "Вверх"){
+        if (direction.direction == "Вверх"){
             var side = "up/"
-        } else if (direction.direction === "Вниз"){
+        } else if (direction.direction == "Вниз"){
             var side = "down/"
-        } else if (direction.direction === "Влево"){
+        } else if (direction.direction == "Влево"){
             var side = "left/"
         } else {
             var side = "right/"
