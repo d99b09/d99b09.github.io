@@ -316,20 +316,15 @@ class MouseMod{
 
     moveMouse(direction){
         if (direction.direction === "Вверх"){
-            return direction.direction
-            const url = new URL("http://127.0.0.1:5000/move_mouse/up/")
+            var url = new URL("http://127.0.0.1:5000/move_mouse/up/")
         } else if (direction.direction === "Вниз"){
-            return direction.direction
-            const url = new URL("http://127.0.0.1:5000/move_mouse/down/")
+            var url = new URL("http://127.0.0.1:5000/move_mouse/down/")
         } else if (direction.direction === "Влево"){
-            return direction.direction
-            const url = new URL("http://127.0.0.1:5000/move_mouse/left/")
+            var url = new URL("http://127.0.0.1:5000/move_mouse/left/")
         } else if (direction.direction === "Вправо"){
-            return direction.direction
-            const url = new URL("http://127.0.0.1:5000/move_mouse/right/")
+            var url = new URL("http://127.0.0.1:5000/move_mouse/right/")
         }
-        // fetch(url).then(response => response.text())
-        return "direction.direction"
+        return fetch(url).then(response => response.text())
 
     }
     moveMouseBySpeed(axis){
