@@ -290,6 +290,12 @@ class MouseMod{
                     "blockType": "command",
                     "text": "Отжать клик",
                 },
+                {
+                    "opcode": "stopMouse",
+                    "blockType": "command",
+                    "text": "Остановить мышь",
+                },
+
 
 
             ],
@@ -350,6 +356,12 @@ class MouseMod{
         const url = new URL("http://127.0.0.1:5000/release/")
         return fetch(url).then(response => response.text())
     }
+
+    stopMouse(){
+        const url = new URL("http://127.0.0.1:5000/move_mouse/stop/")
+        return fetch(url).then(response => response.text())
+    }
+
 
 }
 
