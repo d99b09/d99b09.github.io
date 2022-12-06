@@ -73,11 +73,6 @@ class MioBandMod{
                     }
                 },
                 {
-                    "opcode": "colibration",
-                    "blockType": "command",
-                    "text": "Запустить калибровку браслета",
-                },
-                {
                     "opcode": "isslant",
                     "blockType": "Boolean",
                     "text": "Есть наклон [direction]?",
