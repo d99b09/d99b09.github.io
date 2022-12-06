@@ -30,13 +30,13 @@ class WS_app:
                 i_list.append(int(i))
             except:
                 pass
-        if i_list[0] == 49:
+        if i_list[0] == 49 or i_list[0] == 48:
             self.decode_message['x'] = i_list[1]
             self.decode_message['y'] = i_list[2]
-        elif i_list[0] == 145:
+        elif i_list[0] == 145 or i_list[0] == 144:
             print(i_list)
             self.decode_message['s'] = 1 if i_list[1] > 3 else 0
-        elif i_list[0] == 81:
+        elif i_list[0] == 81 or i_list[0] == 80:
             print(f'Заряд:{i_list[1]}%')
 
         return self.decode_message
