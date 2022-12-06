@@ -104,43 +104,6 @@ class MioBandMod{
                     "blockType": "Boolean",
                     "text": "Есть жест?"
                 },
-                {
-                    "opcode": "ifgesture",
-                    "blockType": "command",
-                    "text": "Когда жест",
-                },
-                {
-                    "opcode": "ifslant",
-                    "blockType": "command",
-                    "text": "Когда наклон [direction]?",
-                    "arguments": {
-                        "direction": {
-                            "type": "string",
-                            "menu": "directionMenu"
-                        }
-                    }
-                },
-                {
-                    "opcode": "ifgestureh",
-                    "blockType": "hat",
-                    "text": "Когда жест",
-                },
-                {
-                    "opcode": "ifslanth",
-                    "blockType": "hat",
-                    "text": "Когда наклон [direction]?",
-                    "arguments": {
-                        "direction": {
-                            "type": "string",
-                            "menu": "directionMenu"
-                        }
-                    }
-                },
-                {
-                    "opcose": "miobandtest",
-                    "blockType": "reporter",
-                    "text": "Тестовый блок",
-                },
             ],
             "menus": {
                 "directionMenu": [
