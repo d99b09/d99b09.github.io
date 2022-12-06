@@ -1,0 +1,8 @@
+websockets
+pyserial
+requests
+Flask
+gevent
+pypiwin32
+pywin32
+pynput
