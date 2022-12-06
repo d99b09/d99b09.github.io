@@ -12,7 +12,7 @@
 
 ```cd backend```
 
-+ Запускаем файлы main.py
++ Запускаем файл main.py
 
 ```python main.py```
 
