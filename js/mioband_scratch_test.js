@@ -118,13 +118,13 @@ class MioBandMod{
         const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
         if (direction.direction === "вверх"){
-            return this.main_msg.y > 100
+            return this.main_msg.y > 200
         } else if (direction.direction === "вниз"){
-            return this.main_msg.y < -100
+            return this.main_msg.y < -200
         } else if (direction.direction === "влево"){
-            return this.main_msg.x < -100
+            return this.main_msg.x < -200
         } else if (direction.direction === "вправо"){
-            return this.main_msg.x > 100
+            return this.main_msg.x > 200
         }
 
     }
@@ -188,6 +188,21 @@ class MouseMod{
                             "type": "string",
 
                             "menu": "directionMenu"
+                        }
+                    }
+                },
+                {
+                    "opcode": "moveMouseBySpeed",
+                    "blockType": "command",
+                    "text": "Двигать мышь [direction] со скоростью [speed]",
+                    "arguments": {
+                        "direction": {
+                            "type": "string",
+                            "menu": "directionMenu"
+                        },
+                        "speed": {
+                            "type": "number",
+                            "defaultValue": "0"
                         }
                     }
                 },
@@ -269,13 +284,26 @@ class MouseMod{
 
     }
     moveMoBySpeed(axis){
-        if (axis.axis === "Вертикаль"){
+        if (axis.axis == "Вертикаль"){
             const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/up/"+ axis.speed + "/")
         }
         else {
             const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/right/"+ axis.speed + "/")
         }
         fetch(url).then(response => response.text())
+    }
+
+    moveMouseBySpeed(axis){
+        if (direction.direction == "Вверх"){
+            var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/up/" + axis.speed + "/")
+        } else if (direction.direction == "Вниз"){
+            var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/down/" + axis.speed + "/")
+        } else if (direction.direction == "Влево"){
+            var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/left/" + axis.speed + "/")
+        } else {
+            var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/right/" + axis.speed + "/")
+        }
+
     }
 
     oneclick(){

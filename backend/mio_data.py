@@ -10,7 +10,7 @@ class Mio_API_get_data(Thread):
         self.last_msg = json.dumps({'x': 0, 'y': 0, 's': 0})
         self.is_open = False
         self.ser = serial.Serial()
-        self.ser.port = 'COM3'
+        self.ser.port = 'COM4'
         self.ser.baudrate = 115200
         self.msg = '0'
         self.sleep_time = 0
@@ -26,8 +26,8 @@ class Mio_API_get_data(Thread):
             except:
                 pass
         if i_list[0] == 49 or i_list[0] == 48:
-            self.decode_message['x'] = i_list[1]
-            self.decode_message['y'] = i_list[2]
+            self.decode_message['y'] = i_list[1]
+            self.decode_message['x'] = i_list[2]
         elif i_list[0] == 145 or i_list[0] == 144:
             print(i_list)
             self.decode_message['s'] = 1 if i_list[1] > 3 else 0
@@ -68,6 +68,9 @@ class Mio_API_get_data(Thread):
 
     def set_port(self, port: str):
         self.ser.port = port
+
+    def get_decode_message(self):
+        return self.decode_message
 
 if __name__ == '__main__':
     dater = Mio_API_get_data()

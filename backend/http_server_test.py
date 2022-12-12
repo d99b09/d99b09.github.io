@@ -18,7 +18,7 @@ def test():
     return ''
 
 
-@app.route('/set_port/<com>')
+@app.route('/set_port/<com>/')
 def port_connect(com):
     print(com)
     data_getter.set_port(com)
@@ -88,14 +88,20 @@ def move_mouse_up_by_speed(speed):
 
 @app.route('/move_mouse_by_speed/down/<speed>/')
 def move_mouse_down_by_speed(speed):
-    mouse.y = int(speed)
+    mouse.y = -int(speed)
     mouse.rotation_by_speed()
     return 'OK'
 
 
 @app.route('/move_mouse_by_speed/left/<speed>/')
 def move_mouse_left_by_speed(speed):
-    mouse.x = int(speed)
+    mouse.x = -int(speed)
+    mouse.rotation_by_speed()
+    return 'OK'
+
+@app.route('/move_mouse_by_speed/right/<speed>/')
+def move_mouse_left_by_speed(speed):
+    mouse.x = -int(speed)
     mouse.rotation_by_speed()
     return 'OK'
 

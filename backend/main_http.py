@@ -16,7 +16,7 @@ def test():
     return
 
 
-@app.route('/set_port/<com>')
+@app.route('/set_port/<com>/')
 def port_connect(com):
     print(com)
     mouse.port = com
