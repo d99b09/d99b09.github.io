@@ -107,7 +107,7 @@ class MioBandMod{
     }
 
     miobandstate(){
-        const url = new URL("http://127.0.0.1:5000/ports/")
+        const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
         return this.test_msg
 
@@ -115,7 +115,7 @@ class MioBandMod{
 
     isslant(direction){
         console.log(direction)
-        const url = new URL("http://127.0.0.1:5000/ports/")
+        const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
         if (direction.direction === "вверх"){
             return this.main_msg.y > 100
@@ -129,12 +129,12 @@ class MioBandMod{
 
     }
     isgesture(){
-        const url = new URL("http://127.0.0.1:5000/ports/")
+        const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
         return this.main_msg.s === "1"
     }
     slantvalue(axis){
-        const url = new URL("http://127.0.0.1:5000/ports/")
+        const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
         if (axis.axis === "Вертикаль"){
             return this.main_msg.y
@@ -142,7 +142,7 @@ class MioBandMod{
         else {return this.main_msg.x}
     }
     ifgestureh(direction){
-        const url = new URL("http://127.0.0.1:5000/ports/")
+        const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
         if (direction.direction === "вверх"){
             if (this.main_msg.y > 100){return true}
