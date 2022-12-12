@@ -291,6 +291,7 @@ class MouseMod{
         else {
             var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/right/"+ axis.speed + "/")
         }
+        console.log(url)
         fetch(url).then(response => response.text())
     }
 
