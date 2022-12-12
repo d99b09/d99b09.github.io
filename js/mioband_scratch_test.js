@@ -21,32 +21,13 @@ class MioBandMod{
         this.runtime = runtime
         this.test_msg = ''
         this.main_msg = null
-        var socket = new WebSocket(mWebSocket);
-        socket.onmessage = ( ...data ) => {
-            this.test_msg = data[0].data
-            this.main_msg = JSON.parse(data[0].data)
-        }
         this.clear();
     }
 
     clear() {
-        // this.msg = 'o'
-        // this.socket = new WebSocket("ws://localhost:8765");
-        // this.socket.onmessage = function (event){
-        //     this.msg = event.data
-        // }
-        // this.ip = 'localhost'
-        // this.port = 8000
-        // this.req = new XMLHttpRequest()
-    }
-
-    update() {
-        if (this.runtime.currentMSecs == this.currentMSecs)
-            return // not a new polling cycle
-        this.currentMSecs = this.runtime.currentMSecs
-        this.ifslant_V = (this.main_msg.s === "1")
 
     }
+
 
     getInfo() {
         return{
@@ -71,11 +52,6 @@ class MioBandMod{
                             "type": "string"
                         }
                     }
-                },
-                {
-                    "opcode": "colibration",
-                    "blockType": "command",
-                    "text": "Запустить калибровку браслета",
                 },
                 {
                     "opcode": "isslant",
@@ -131,12 +107,16 @@ class MioBandMod{
     }
 
     miobandstate(){
+        const url = new URL("http://127.0.0.1:5000/ports/")
+        this.test_msg = fetch(url).then(response => response.text())
         return this.test_msg
 
     }
 
     isslant(direction){
         console.log(direction)
+        const url = new URL("http://127.0.0.1:5000/ports/")
+        this.test_msg = fetch(url).then(response => response.text())
         if (direction.direction === "вверх"){
             return this.main_msg.y > 100
         } else if (direction.direction === "вниз"){
@@ -149,15 +129,21 @@ class MioBandMod{
 
     }
     isgesture(){
+        const url = new URL("http://127.0.0.1:5000/ports/")
+        this.test_msg = fetch(url).then(response => response.text())
         return this.main_msg.s === "1"
     }
     slantvalue(axis){
+        const url = new URL("http://127.0.0.1:5000/ports/")
+        this.test_msg = fetch(url).then(response => response.text())
         if (axis.axis === "Вертикаль"){
             return this.main_msg.y
         }
         else {return this.main_msg.x}
     }
     ifgestureh(direction){
+        const url = new URL("http://127.0.0.1:5000/ports/")
+        this.test_msg = fetch(url).then(response => response.text())
         if (direction.direction === "вверх"){
             if (this.main_msg.y > 100){return true}
         } else if (direction.direction === "вниз"){
@@ -168,21 +154,8 @@ class MioBandMod{
             if (this.main_msg.x > 100){return true}
         }
         return false
-
     }
-    ifslanth(){
-        console.log("Hello");
-        sleep(2000)
-            .then(() => { console.log("World!"); })
-            .then(() => {
-                sleep(2000)
-                    .then(() => { console.log("Goodbye!"); })
-            });
-        return true
 
-        // return this.main_msg.s === "1";
-
-    }
     miobandtest(){
         const url = new URL("http://127.0.0.1:5000/")
         return fetch(url).then(response => response.text())
