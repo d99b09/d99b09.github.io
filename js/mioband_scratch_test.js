@@ -286,24 +286,27 @@ class MouseMod{
     moveMoBySpeed(axis){
         console.log(axis)
         if (axis.axis == "Вертикаль"){
-            const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/up/"+ axis.speed + "/")
+            var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/up/"+ axis.speed + "/")
         }
         else {
-            const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/right/"+ axis.speed + "/")
+            var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/right/"+ axis.speed + "/")
         }
         fetch(url).then(response => response.text())
     }
 
     moveMouseBySpeed(axis){
-        if (direction.direction == "Вверх"){
+        console.log(axis)
+
+        if (axis.direction == "Вверх"){
             var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/up/" + axis.speed + "/")
-        } else if (direction.direction == "Вниз"){
+        } else if (axis.direction == "Вниз"){
             var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/down/" + axis.speed + "/")
-        } else if (direction.direction == "Влево"){
+        } else if (axis.direction == "Влево"){
             var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/left/" + axis.speed + "/")
         } else {
             var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/right/" + axis.speed + "/")
         }
+        fetch(url).then(response => response.text())
 
     }
 
