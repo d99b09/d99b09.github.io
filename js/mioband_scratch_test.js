@@ -284,6 +284,7 @@ class MouseMod{
 
     }
     moveMoBySpeed(axis){
+        console.log(axis)
         if (axis.axis == "Вертикаль"){
             const url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/up/"+ axis.speed + "/")
         }

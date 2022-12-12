@@ -99,11 +99,6 @@ def move_mouse_left_by_speed(speed):
     mouse.rotation_by_speed()
     return 'OK'
 
-@app.route('/move_mouse_by_speed/right/<speed>/')
-def move_mouse_left_by_speed(speed):
-    mouse.x = -int(speed)
-    mouse.rotation_by_speed()
-    return 'OK'
 
 
 @app.route('/move_mouse_by_speed/right/<speed>/')
