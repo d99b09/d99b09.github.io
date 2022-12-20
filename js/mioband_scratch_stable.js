@@ -138,6 +138,8 @@ class MioBandMod{
     miobandstate(){
         const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
+        console.log(this.test_msg)
+        console.log(this.test_msg.x)
         return this.test_msg
 
     }
@@ -162,7 +164,7 @@ class MioBandMod{
     isgesture(){
         const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
-        return this.main_msg.s === "1"
+        return this.test_msg.s === "1"
     }
     // slantvalue(axis){
     //     const url = new URL("http://127.0.0.1:5000/get_data/")
