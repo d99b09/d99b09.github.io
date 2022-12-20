@@ -146,18 +146,17 @@ class MioBandMod{
         console.log(direction)
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
         this.isslant_msg = fetch(url).then(response => response.text())
+        console.log(this.isslant_msg)
+
         console.log(this.isslant_msg.v)
         return 200 < this.isslant_msg.v
     }
 
     isslant_dg(direction){
         console.log(direction)
-        const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/" + dg + "/")
-        fetch(url)
-            .then(response => response.text())
-            .then((response) => {
-                this.isslant_dg_msg = response
-                })
+        const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
+        this.isslant_dg_msg = fetch(url).then(response => response.text())
+        console.log(this.isslant_msg.v)
         return "1" === this.isslant_dg_msg
     }
     isgesture(){
