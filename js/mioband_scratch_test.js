@@ -138,13 +138,13 @@ class MioBandMod{
     isslant(direction){
         console.log(direction)
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
-        return "1" === fetch(url).then(response => response.text())
+        return "1" == fetch(url).then(response => response.text())
     }
 
     isslant_dg(direction){
         console.log(direction)
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/" + dg + "/")
-        return "1" === fetch(url).then(response => response.text())
+        return "1" == fetch(url).then(response => response.text())
     }
     isgesture(){
         const url = new URL("http://127.0.0.1:5000/get_data/")
