@@ -76,6 +76,9 @@ class MioBandMod{
                         "direction": {
                             "type": "string",
                             "menu": "directionMenu"
+                        },
+                        "dg": {
+                            "type": "string"
                         }
                     }
                 },
