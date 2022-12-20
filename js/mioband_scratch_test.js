@@ -21,6 +21,7 @@ class MioBandMod{
         this.runtime = runtime
         this.test_msg = ''
         this.main_msg = null
+        this.isslant_msg = ''
         this.clear();
     }
 
@@ -91,7 +92,7 @@ class MioBandMod{
                     "blockType": "reporter",
                     "text": "Степень наклона [direction]",
                     "arguments": {
-                        "axis": {
+                        "direction": {
                             "type": "string",
                             "menu": "axisMenu"
                         },
@@ -138,13 +139,20 @@ class MioBandMod{
     isslant(direction){
         console.log(direction)
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
-        return "1" == fetch(url).then(response => response.text())
+        fetch(url)
+            .then(response => response.text())
+            .then((response) => {
+                console.log(response)
+                this.isslant_msg = response
+                })
+        console.log(this.isslant_msg)
+        return "1" === this.isslant_msg
     }
 
     isslant_dg(direction){
         console.log(direction)
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/" + dg + "/")
-        return "1" == fetch(url).then(response => response.text())
+        return "1" === fetch(url).then((response) => response.text())
     }
     isgesture(){
         const url = new URL("http://127.0.0.1:5000/get_data/")

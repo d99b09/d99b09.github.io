@@ -16,7 +16,7 @@ data_getter.start()
 
 @app.route('/')
 def test():
-    return 'OK'
+    return '1'
 
 
 @app.route('/set_port/<com>/')
@@ -34,7 +34,8 @@ def get_data():
 @app.route('/is_slant/<direction>/')
 def is_slant(direction):
     msg = data_getter.decode_message
-    if direction == 'вверх':
+    print(direction)
+    if direction == 'up':
         return str(int(msg['y'] > 200))
     elif direction == 'вниз':
         return str(int(msg['y'] < -200))
