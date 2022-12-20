@@ -22,6 +22,9 @@ class MioBandMod{
         this.test_msg = ''
         this.main_msg = null
         this.isslant_msg = ''
+        this.isslant_dg_msg = ''
+        this.slantvalue_msg = ''
+        this.slantvalue_d_msg = ''
         this.clear();
     }
 
@@ -76,17 +79,17 @@ class MioBandMod{
                         }
                     }
                 },
-                {
-                    "opcode": "slantvalue",
-                    "blockType": "reporter",
-                    "text": "Степень наклона [axis]",
-                    "arguments": {
-                        "axis": {
-                            "type": "string",
-                            "menu": "axisMenu"
-                        },
-                    }
-                },
+                // {
+                //     "opcode": "slantvalue",
+                //     "blockType": "reporter",
+                //     "text": "Степень наклона [axis]",
+                //     "arguments": {
+                //         "axis": {
+                //             "type": "string",
+                //             "menu": "axisMenu"
+                //         },
+                //     }
+                // },
                 {
                     "opcode": "slantvalue_d",
                     "blockType": "reporter",
@@ -94,7 +97,7 @@ class MioBandMod{
                     "arguments": {
                         "direction": {
                             "type": "string",
-                            "menu": "axisMenu"
+                            "menu": "directionMenu"
                         },
                     }
                 },
@@ -142,34 +145,42 @@ class MioBandMod{
         fetch(url)
             .then(response => response.text())
             .then((response) => {
-                console.log(response)
                 this.isslant_msg = response
                 })
-        console.log(this.isslant_msg)
         return "1" === this.isslant_msg
     }
 
     isslant_dg(direction){
         console.log(direction)
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/" + dg + "/")
-        return "1" === fetch(url).then((response) => response.text())
+        fetch(url)
+            .then(response => response.text())
+            .then((response) => {
+                this.isslant_dg_msg = response
+                })
+        return "1" === this.isslant_dg_msg
     }
     isgesture(){
         const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
         return this.main_msg.s === "1"
     }
-    slantvalue(axis){
-        const url = new URL("http://127.0.0.1:5000/get_data/")
-        this.test_msg = fetch(url).then(response => response.text())
-        if (axis.axis === "Вертикаль"){
-            return this.main_msg.y
-        }
-        else {return this.main_msg.x}
-    }
+    // slantvalue(axis){
+    //     const url = new URL("http://127.0.0.1:5000/get_data/")
+    //     this.test_msg = fetch(url).then(response => response.text())
+    //     if (axis.axis === "Вертикаль"){
+    //         return this.main_msg.y
+    //     }
+    //     else {return this.main_msg.x}
+    // }
     slantvalue_d(){
         const url = new URL("http://127.0.0.1:5000/slant_value_d/" + direction.direction + "/")
-        return fetch(url).then(response => response.text())
+        fetch(url)
+            .then(response => response.text())
+            .then((response) => {
+                this.slantvalue_d_msg = response
+                })
+        return "1" === this.slantvalue_d_msg
     }
 }
 
