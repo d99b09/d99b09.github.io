@@ -13,9 +13,10 @@ data_getter = Mio_API_get_data()
 mouse.start()
 data_getter.start()
 
+
 @app.route('/')
 def test():
-    return ''
+    return 'OK'
 
 
 @app.route('/set_port/<com>/')
@@ -24,9 +25,55 @@ def port_connect(com):
     data_getter.set_port(com)
     return 'OK'
 
+
 @app.route('/get_data/')
 def get_data():
     return data_getter.get_last_msg()
+
+
+@app.route('/is_slant/<direction>/')
+def is_slant(direction):
+    msg = data_getter.decode_message
+    if direction == 'вверх':
+        return str(int(msg['y'] > 200))
+    elif direction == 'вниз':
+        return str(int(msg['y'] < -200))
+    elif direction == 'влево':
+        return str(int(msg['x'] < -200))
+    elif direction == 'вправо':
+        return str(int(msg['x'] > 200))
+    return direction  # data_getter.get_last_msg()
+
+
+@app.route('/is_slant_dg/<direction>/<dg>/')
+def is_slant_dg(direction, dg):
+    dg = int(dg)
+    msg = data_getter.decode_message
+    print(msg)
+    if direction == 'вверх':
+        return str(int(msg['y'] > dg))
+    elif direction == 'вниз':
+        return str(int(msg['y'] < -dg))
+    elif direction == 'влево':
+        return str(int(msg['x'] < -dg))
+    elif direction == 'вправо':
+        return str(int(msg['x'] > dg))
+    return dg  # data_getter.get_last_msg()
+
+
+@app.route('/slant_value_d/<direction>/')
+def slant_value_d(direction):
+    msg = data_getter.decode_message
+    if direction == 'вверх':
+        return str(msg['y']) if msg['y'] > 0 else 0
+    elif direction == 'вниз':
+        return str(msg['y']) if msg['y'] < 0 else 0
+    elif direction == 'влево':
+        return str(msg['y']) if msg['x'] < 0 else 0
+    elif direction == 'вправо':
+        return str(msg['y']) if msg['x'] > 0 else 0
+    return 'Error'  # data_getter.get_last_msg()
+
 
 @app.route('/port/')
 def get_port():
@@ -98,7 +145,6 @@ def move_mouse_left_by_speed(speed):
     mouse.x = -int(speed)
     mouse.rotation_by_speed()
     return 'OK'
-
 
 
 @app.route('/move_mouse_by_speed/right/<speed>/')

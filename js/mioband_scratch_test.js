@@ -65,9 +65,31 @@ class MioBandMod{
                     }
                 },
                 {
+                    "opcode": "isslant_dg",
+                    "blockType": "Boolean",
+                    "text": "Есть наклон [direction] на [dg]?",
+                    "arguments": {
+                        "direction": {
+                            "type": "string",
+                            "menu": "directionMenu"
+                        }
+                    }
+                },
+                {
                     "opcode": "slantvalue",
                     "blockType": "reporter",
                     "text": "Степень наклона [axis]",
+                    "arguments": {
+                        "axis": {
+                            "type": "string",
+                            "menu": "axisMenu"
+                        },
+                    }
+                },
+                {
+                    "opcode": "slantvalue_d",
+                    "blockType": "reporter",
+                    "text": "Степень наклона [direction]",
                     "arguments": {
                         "axis": {
                             "type": "string",
@@ -115,18 +137,14 @@ class MioBandMod{
 
     isslant(direction){
         console.log(direction)
-        const url = new URL("http://127.0.0.1:5000/get_data/")
-        this.test_msg = fetch(url).then(response => response.text())
-        if (direction.direction === "вверх"){
-            return this.main_msg.y > 200
-        } else if (direction.direction === "вниз"){
-            return this.main_msg.y < -200
-        } else if (direction.direction === "влево"){
-            return this.main_msg.x < -200
-        } else if (direction.direction === "вправо"){
-            return this.main_msg.x > 200
-        }
+        const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
+        return "1" === fetch(url).then(response => response.text())
+    }
 
+    isslant_dg(direction){
+        console.log(direction)
+        const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/" + dg + "/")
+        return "1" === fetch(url).then(response => response.text())
     }
     isgesture(){
         const url = new URL("http://127.0.0.1:5000/get_data/")
@@ -141,28 +159,10 @@ class MioBandMod{
         }
         else {return this.main_msg.x}
     }
-    ifgestureh(direction){
-        const url = new URL("http://127.0.0.1:5000/get_data/")
-        this.test_msg = fetch(url).then(response => response.text())
-        if (direction.direction === "вверх"){
-            if (this.main_msg.y > 100){return true}
-        } else if (direction.direction === "вниз"){
-            if (this.main_msg.y < -100){return true}
-        } else if (direction.direction === "влево"){
-            if (this.main_msg.x < -100){return true}
-        } else if (direction.direction === "вправо"){
-            if (this.main_msg.x > 100){return true}
-        }
-        return false
-    }
-
-    miobandtest(){
-        const url = new URL("http://127.0.0.1:5000/")
+    slantvalue_d(){
+        const url = new URL("http://127.0.0.1:5000/slant_value_d/" + direction.direction + "/")
         return fetch(url).then(response => response.text())
-
     }
-
-
 }
 
 class MouseMod{
@@ -179,18 +179,18 @@ class MouseMod{
             "id": "MouseMod",
             "name": "MouseControl",
             "blocks": [
-                {
-                    "opcode": "moveMo",
-                    "blockType": "command",
-                    "text": "Двигать мышь [direction]",
-                    "arguments": {
-                        "direction": {
-                            "type": "string",
-
-                            "menu": "directionMenu"
-                        }
-                    }
-                },
+                // {
+                //     "opcode": "moveMo",
+                //     "blockType": "command",
+                //     "text": "Двигать мышь [direction]",
+                //     "arguments": {
+                //         "direction": {
+                //             "type": "string",
+                //
+                //             "menu": "directionMenu"
+                //         }
+                //     }
+                // },
                 {
                     "opcode": "moveMouseBySpeed",
                     "blockType": "command",
@@ -292,7 +292,7 @@ class MouseMod{
             var url = new URL("http://127.0.0.1:5000/move_mouse_by_speed/right/"+ axis.speed + "/")
         }
         console.log(url)
-        fetch(url).then(response => response.text())
+        return fetch(url).then(response => response.text())
     }
 
     moveMouseBySpeed(axis){
