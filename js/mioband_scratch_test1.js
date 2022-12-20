@@ -147,7 +147,7 @@ class MioBandMod{
     isslant(direction){
         console.log('isslant')
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
-        this.isslant_msg = fetch(url).then(response => response.text())
+        this.isslant_msg = fetch(url).then(response => response.json())
         console.log(this.isslant_msg)
 
         console.log(this.isslant_msg.v)
