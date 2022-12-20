@@ -8,6 +8,12 @@
             "text"
         </div>
         <script>
+            async function getJSON(url){
+                let response = await fetch(url);
+                let json = await response.json();
+                console.log(json)
+                return json
+            }
 
             // // const websocket = new WebSocket("ws://localhost:5678/");
             // // websocket.onmessage = (...data) => {
@@ -26,8 +32,11 @@
             //
 
             const url = new URL("http://127.0.0.1:5000/is_slant/up/")
-            let res = fetch(url).then(response => response.text())
+            let res = getJSON(url)
+
             console.log(res)
+
+
 
         //     console.log( "1" == fetch(url).then((response) => response.text()))
         //

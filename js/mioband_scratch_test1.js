@@ -1,20 +1,12 @@
 console.log('hello')
+async function getJSON(url){
+                let response = await fetch(url);
+                let json = await response.json();
+                console.log(json)
+                return json
+            }
 
 
-const mWebSocket = 'ws://localhost:5678';
-
-class WsMain{
-    constructor() {
-        this.test_msg = ''
-        websocket.onmessage = (...data) => {
-                this.test_msg = data[0].data
-                this.main_msg = JSON.parse(data[0].data)
-
-
-            };
-
-    }
-}
 class MioBandMod{
     constructor(runtime) {
         this.ifslant_V = false
@@ -147,11 +139,9 @@ class MioBandMod{
     isslant(direction){
         console.log('isslant')
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
-        this.isslant_msg = fetch(url).then(response => response.json())
-        console.log(this.isslant_msg)
-
-        console.log(this.isslant_msg.v)
-        return 200 < this.isslant_msg.v
+        let isslant_msg = getJSON(url)
+        console.log(isslant_msg)
+        return 200 < isslant_msg.v
     }
 
     isslant_dg(direction){

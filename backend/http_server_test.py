@@ -36,7 +36,7 @@ def get_data():
 def is_slant(direction):
     msg = data_getter.decode_message
     print(direction)
-    if direction == 'вверх':
+    if direction == 'up':
         return json.dumps({'v': msg['y']})
     elif direction == 'вниз':
         return json.dumps({'v': -msg['y']})
