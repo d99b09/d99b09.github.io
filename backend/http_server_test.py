@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from threading import Thread
 import serial
+import json
 
 from backend.mio_data import Mio_API_get_data
 from mouse_control import Mio_API_control
@@ -36,13 +37,13 @@ def is_slant(direction):
     msg = data_getter.decode_message
     print(direction)
     if direction == 'вверх':
-        return str(int(msg['y'] > 200))
+        return json.dumps({'v': msg['y']})
     elif direction == 'вниз':
-        return str(int(msg['y'] < -200))
+        return json.dumps({'v': -msg['y']})
     elif direction == 'влево':
-        return str(int(msg['x'] < -200))
+        return json.dumps({'v': -msg['x']})
     elif direction == 'вправо':
-        return str(int(msg['x'] > 200))
+        return json.dumps({'v': msg['x']})
     return direction  # data_getter.get_last_msg()
 
 
