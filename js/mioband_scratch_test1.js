@@ -141,6 +141,8 @@ class MioBandMod{
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
         let isslant_msg = getJSON(url)
         console.log(isslant_msg)
+        console.log(isslant_msg.v)
+
         return 200 < isslant_msg.v
     }
 
