@@ -372,7 +372,7 @@ class MioPlatformMod{
                     "text": "Показание УЗ датчика номер [adress]",
                     "arguments": {
                         "adress": {
-                            "type": "number",
+                            "type": "string",
                             "menu": "sensorNumber"
                         },
                     }
