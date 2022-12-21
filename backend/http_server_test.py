@@ -67,14 +67,14 @@ def is_slant_dg(direction, dg):
 def slant_value_d(direction):
     msg = data_getter.decode_message
     if direction == 'вверх':
-        return str(msg['y']) if msg['y'] > 0 else 0
+        return str(msg['y']) if msg['y'] > 0 else str(0)
     elif direction == 'вниз':
-        return str(msg['y']) if msg['y'] < 0 else 0
+        return str(-msg['y']) if msg['y'] < 0 else str(0)
     elif direction == 'влево':
-        return str(msg['x']) if msg['x'] < 0 else 0
+        return str(-msg['x']) if msg['x'] < 0 else str(0)
     elif direction == 'вправо':
-        return str(msg['x']) if msg['x'] > 0 else 0
-    return 'Error'  # data_getter.get_last_msg()
+        return str(msg['x']) if msg['x'] > 0 else str(0)
+    return str(0)  # data_getter.get_last_msg()
 
 
 @app.route('/port/')

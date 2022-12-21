@@ -125,18 +125,14 @@ class MioBandMod{
     miobandstate(){
         const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
-        console.log(this.test_msg)
-        console.log(this.test_msg.x)
         return this.test_msg
 
     }
 
     isslant(direction){
-        console.log('isslant')
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
         return fetch(url).then(async (response) => {
                 const data = await response.json();
-                console.log(data.v)
                 return data.v > 200
             })
     }
@@ -145,7 +141,6 @@ class MioBandMod{
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
         return fetch(url).then(async (response) => {
                 const data = await response.json();
-                console.log(data.v)
                 return data.v > direction.dg
             })
     }
@@ -153,7 +148,6 @@ class MioBandMod{
         const url = new URL("http://127.0.0.1:5000/get_data/")
         return fetch(url).then(async (response) => {
                 const data = await response.json();
-                console.log(data.s)
                 return data.s === "1"
             })
     }
@@ -169,7 +163,6 @@ class MioBandMod{
         const url = new URL("http://127.0.0.1:5000/slant_value_d/" + direction.direction + "/")
         return fetch(url).then(async (response) => {
                 const data = await response.text();
-                console.log(data)
                 return data
             })
     }
@@ -349,13 +342,127 @@ class MouseMod{
 
 }
 
+class PlatformMod{
+    constructor(runtime) {
+        this.clear();
+    }
+
+    clear() {
+        this.socket = null;
+    }
+
+    getInfo() {
+        return{
+            "id": "PlatformMod",
+            "name": "PlatformControl",
+            "blocks": [
+                {
+                    "opcode": "platform_connect",
+                    "blockType": "command",
+                    "text": "Подключиться к Платформе по адресу [adress]",
+                    "arguments": {
+                        "adress": {
+                            "type": "string"
+                        },
+                    }
+                },
+                {
+                    "opcode": "get_sensor",
+                    "blockType": "reporter",
+                    "text": "Показание УЗ датчика номер [adress]",
+                    "arguments": {
+                        "adress": {
+                            "type": "number",
+                            "menu": "sensorNumber"
+                        },
+                    }
+                },
+                {
+                    "opcode": "move_to",
+                    "blockType": "command",
+                    "text": "Ехать [axis]",
+                    "arguments": {
+                        "axis": {
+                            "type": "string",
+                            "menu": "axisMenu1"
+                        },
+                    }
+                },
+                {
+                    "opcode": "turn_to",
+                    "blockType": "command",
+                    "text": "Повернуть на месте [axis]",
+                    "arguments": {
+                        "axis": {
+                            "type": "string",
+                            "menu": "axisMenu2"
+                        },
+                    }
+                },
+                {
+                    "opcode": "move_and_turn_to",
+                    "blockType": "command",
+                    "text": "Двигаться с поворотом [axis1] [axis2]",
+                    "arguments": {
+                        "axis1": {
+                            "type": "string",
+                            "menu": "axisMenu1"
+                        },
+                        "axis2": {
+                            "type": "string",
+                            "menu": "axisMenu2"
+                        },
+                    }
+                },
+                {
+                    "opcode": "stop_platform",
+                    "blockType": "command",
+                    "text": "Остановить движение",
+                },
+
+
+            ],
+            "menus": {
+                "sensorNumber": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "directionMenu": [
+                    "Вверх",
+                    "Вниз",
+                    "Влево",
+                    "Вправо"
+                ],
+                "axisMenu1": [
+                    "Вперед",
+                    "Назад"
+                ],
+                "axisMenu2": [
+                    "Влево",
+                    "Вправо"
+                ],
+            }
+        }
+    }
+
+
+
+}
+
 (function() {
     console.log('hello')
     var extensionClass1 = MioBandMod
     var extensionClass2 = MouseMod
+    var extensionClass3 = PlatformMod
+
     if (typeof window === "undefined" || !window.vm) {
         Scratch.extensions.register(new extensionClass1())
         Scratch.extensions.register(new extensionClass2())
+        Scratch.extensions.register(new extensionClass3())
+
 
     }
     else {
