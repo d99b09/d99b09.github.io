@@ -138,8 +138,6 @@ class MioBandMod{
                 console.log(data.v)
                 return data.v > 200
             })
-
-        return 200 < isslant_msg.v
     }
 
     isslant_dg(direction){
