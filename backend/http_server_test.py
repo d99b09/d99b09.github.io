@@ -71,9 +71,9 @@ def slant_value_d(direction):
     elif direction == 'вниз':
         return str(msg['y']) if msg['y'] < 0 else 0
     elif direction == 'влево':
-        return str(msg['y']) if msg['x'] < 0 else 0
+        return str(msg['x']) if msg['x'] < 0 else 0
     elif direction == 'вправо':
-        return str(msg['y']) if msg['x'] > 0 else 0
+        return str(msg['x']) if msg['x'] > 0 else 0
     return 'Error'  # data_getter.get_last_msg()
 
 

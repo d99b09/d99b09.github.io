@@ -70,7 +70,8 @@ class MioBandMod{
                             "menu": "directionMenu"
                         },
                         "dg": {
-                            "type": "string"
+                            "type": "number",
+                            "defaultValue": "0"
                         }
                     }
                 },
@@ -137,23 +138,17 @@ class MioBandMod{
     }
 
     async isslant(direction){
-        console.log('isslant')
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
         let response = await fetch(url);
         let json = await response.json();
-        console.log(json.v)
-        console.log(json)
-        console.log(200 < json.v)
-
         return 200 < json.v
     }
 
-    isslant_dg(direction){
-        console.log(direction)
+    async isslant_dg(direction){
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
-        this.isslant_dg_msg = fetch(url).then(response => response.text())
-        console.log(this.isslant_msg.v)
-        return "1" === this.isslant_dg_msg
+        let response = await fetch(url);
+        let json = await response.json();
+        return direction.dg < json.v
     }
     isgesture(){
         const url = new URL("http://127.0.0.1:5000/get_data/")

@@ -64,7 +64,8 @@ class MioBandMod{
                             "menu": "directionMenu"
                         },
                         "dg": {
-                            "type": "string"
+                            "type": "number",
+                            "defaultValue": "0"
                         }
                     }
                 },
@@ -141,16 +142,20 @@ class MioBandMod{
     }
 
     isslant_dg(direction){
-        console.log(direction)
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
-        this.isslant_dg_msg = fetch(url).then(response => response.text())
-        console.log(this.isslant_msg.v)
-        return "1" === this.isslant_dg_msg
+        return fetch(url).then(async (response) => {
+                const data = await response.json();
+                console.log(data.v)
+                return data.v > direction.dg
+            })
     }
     isgesture(){
         const url = new URL("http://127.0.0.1:5000/get_data/")
-        this.test_msg = fetch(url).then(response => response.text())
-        return this.test_msg.s === "1"
+        return fetch(url).then(async (response) => {
+                const data = await response.json();
+                console.log(data.s)
+                return data.s === "1"
+            })
     }
     // slantvalue(axis){
     //     const url = new URL("http://127.0.0.1:5000/get_data/")
@@ -160,14 +165,13 @@ class MioBandMod{
     //     }
     //     else {return this.main_msg.x}
     // }
-    slantvalue_d(){
+    slantvalue_d(direction){
         const url = new URL("http://127.0.0.1:5000/slant_value_d/" + direction.direction + "/")
-        fetch(url)
-            .then(response => response.text())
-            .then((response) => {
-                this.slantvalue_d_msg = response
-                })
-        return "1" === this.slantvalue_d_msg
+        return fetch(url).then(async (response) => {
+                const data = await response.text();
+                console.log(data)
+                return data
+            })
     }
 }
 
