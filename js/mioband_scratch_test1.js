@@ -136,14 +136,16 @@ class MioBandMod{
 
     }
 
-    isslant(direction){
+    async isslant(direction){
         console.log('isslant')
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
-        let isslant_msg = getJSON(url)
-        console.log(isslant_msg)
-        console.log(isslant_msg.v)
+        let response = await fetch(url);
+        let json = await response.json();
+        console.log(json.v)
+        console.log(json)
+        console.log(200 < json.v)
 
-        return 200 < isslant_msg.v
+        return 200 < json.v
     }
 
     isslant_dg(direction){
