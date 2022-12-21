@@ -29,6 +29,18 @@ class MioBandMod{
                     "text": "Состояние браслета",
                 },
                 {
+                    "opcode": "band_connect",
+                    "blockType": "command",
+                    "text": "Подключится к браслету под именем [name]",
+                    "arguments": {
+                        "name": {
+                            "type": "string",
+                            "defaultValue": ""
+                        }
+                    }
+
+                },
+                {
                     "opcode": "usbport",
                     "blockType": "reporter",
                     "text": "Порты"
