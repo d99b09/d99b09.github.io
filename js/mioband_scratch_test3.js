@@ -430,12 +430,6 @@ class MioPlatformMod{
                     4,
                     5
                 ],
-                "directionMenu": [
-                    "Вверх",
-                    "Вниз",
-                    "Влево",
-                    "Вправо"
-                ],
                 "axisMenu1": [
                     "Вперед",
                     "Назад"
