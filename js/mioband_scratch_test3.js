@@ -123,7 +123,10 @@ class MioBandMod{
             }
         }
     }
+    band_connect(address){
+        return fetch("http://127.0.0.1:5000/band_connect/" + address + "/")
 
+    }
     usbport(){
         const url = new URL("http://127.0.0.1:5000/ports/")
         return fetch(url).then(response => response.text())
@@ -453,8 +456,28 @@ class MioPlatformMod{
             }
         }
     }
+    platform_connect(address){
+        return fetch("http://127.0.0.1:5000/platform/connect/" +
+            address.address + "/")
+    }
+    get_sensor(number){
+        return fetch("http://127.0.0.1:5000/platform/get_sensor/" +
+            number.adress + "/")
+    }
+    move_to(axis){
+        return fetch("http://127.0.0.1:5000/platform/move_to/" +
+            axis.axis + "/")
+    }
+    turn_to(axis){
+        return fetch("http://127.0.0.1:5000/platform/turn_to/" +
+            axis.axis + "/")
+    }
+    move_and_turn_to(axis){
+        return fetch("http://127.0.0.1:5000/platform/move_and_turn_to/" +
+            axis.axis1 + "-" + axis.axis2 + "/")
+    }
     stop_platform(){
-        console.log('stop')
+        return fetch("http://127.0.0.1:5000/platform/stop_platform/")
     }
 
 

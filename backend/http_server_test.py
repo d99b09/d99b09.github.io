@@ -20,6 +20,13 @@ def test():
     return '1'
 
 
+@app.route('/band_connect/<name>/')
+def band_connect(bracelet_name):
+    cmd = bytearray(('~' + 'G' + bracelet_name).encode('utf-8'))
+    return 'OK'
+
+
+
 @app.route('/set_port/<com>/')
 def port_connect(com):
     print(com)
@@ -178,6 +185,75 @@ def press():
 def release():
     mouse.release_button('left_click')
     return 'OK'
+
+
+@app.route('/platform/connect/<address>/')
+def platform_connect(mac_address):
+    cmd = bytearray(8)
+    cmd[0] = 0x7E  # ~
+    cmd[1] = 0x48
+    for i in range(2, 8):
+        cmd[i] = mac_address[i - 2]
+
+
+@app.route('/platform/get_sensor/<num>/')
+def get_sensor(num):
+    cmd = bytearray(3)
+    cmd[0] = 0x7E  # ~
+    cmd[1] = 0x49
+    cmd[2] = int(num)
+
+
+@app.route('/platform/move_to/<axis>/')
+def move_to(axis):
+    if axis == 'Вперед':
+        mov_dir = 0x3E
+    elif axis == 'Назад':
+        mov_dir = 0x3C
+    else:
+        return "Error 404"
+    cmd = bytearray(3)
+    cmd[0] = 0x7E  # ~
+    cmd[1] = 0x4D
+    cmd[2] = mov_dir
+
+
+@app.route('platform/turn_to/<axis>/')
+def turn_to(axis):
+    if axis == 'Вправо':
+        rot_dir = 0x3E
+    elif axis == 'Влево':
+        rot_dir = 0x3C
+    else:
+        return "Error 404"
+    cmd = bytearray(3)
+    cmd[0] = 0x7E  # ~
+    cmd[1] = 0x52
+    cmd[2] = rot_dir
+
+@app.route('platform/move_and_turn_to/<axis>/')
+def move_and_turn_to(axis):
+    if axis == 'Вперед-Влево':
+        dir= 0x01
+    elif axis == 'Вперед-Вправо':
+        dir = 0x02
+    elif axis == 'Назад-Влево':
+        dir = 0x03
+    elif axis == 'Назад-Вправо':
+        dir = 0x04
+    else:
+        return "Error 404"
+    cmd = bytearray(3)
+    cmd[0] = 0x7E  # ~
+    cmd[1] = 0x4B
+    cmd[2] = dir
+
+
+@app.route('platform/stop_platform/')
+def stop_platform():
+    cmd = bytearray(2)
+    cmd[0] = 0x7E  # ~
+    cmd[1] = 0x53
 
 
 app.run()
