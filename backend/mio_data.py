@@ -10,11 +10,12 @@ class Mio_API_get_data(Thread):
         self.last_msg = json.dumps({'x': 0, 'y': 0, 's': 0})
         self.is_open = False
         self.ser = serial.Serial()
-        self.ser.port = 'COM4'
+        self.ser.port = '/dev/cu.usbmodem8178E37417321'
         self.ser.baudrate = 115200
         self.msg = '0'
         self.sleep_time = 0
         self.decode_message = {'x': 0, 'y': 0, 's': 0}  # new decode fun
+        self.msg_whiting = False
 
     def string_to_json(self, line):
         decode_line = line.decode()
@@ -49,14 +50,18 @@ class Mio_API_get_data(Thread):
                 print(f'Data: {line}')
                 while True:
                     line = self.ser.readline()
+                    print(line)
+                    # if self.msg_whiting:
+                    #     while line != b'GOK\r\n':
+                    #         line = self.ser.readline()
+                    #     self.msg_whiting = True
                     try:
                         message = self.string_to_json(line)
                         msg = json.dumps(message)
-                        print(f'Messege:{msg}')
+                        # print(f'Messege:{msg}')
                         self.last_msg = msg
                         # await websocket.send(msg)
                         # await asyncio.sleep(self.sleep_time)
-
                     except:
                         pass
             except:
@@ -71,6 +76,10 @@ class Mio_API_get_data(Thread):
 
     def get_decode_message(self):
         return self.decode_message
+
+    def band_connect(self, cmd):
+        self.ser.write(cmd)
+
 
 if __name__ == '__main__':
     dater = Mio_API_get_data()
