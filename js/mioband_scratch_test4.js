@@ -482,7 +482,7 @@ class MioPlatformMod{
 }
 
 (function() {
-    console.log('hello')
+    console.log('hello1')
     var extensionClass1 = MioBandMod
     var extensionClass2 = MouseMod
     var extensionClass3 = MioPlatformMod
