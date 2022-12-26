@@ -1,6 +1,3 @@
-console.log('hello')
-
-
 class MioBandMod{
     constructor(runtime) {
         this.ifslant_V = false
