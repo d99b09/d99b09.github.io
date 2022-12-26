@@ -121,10 +121,10 @@ class MioBandMod{
         }
     }
     band_connect(address){
-        console.log(address)
 
-        console.log(address.name)
-        return fetch("http://127.0.0.1:5000/band_connect/" + address.name + "/")
+        const url = new URL("http://127.0.0.1:5000/band_connect/" + address.name + "/")
+
+        return fetch(url).then(response => response.text())
 
     }
     usbport(){
