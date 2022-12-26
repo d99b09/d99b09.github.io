@@ -21,12 +21,12 @@ def test():
 
 
 @app.route('/band_connect/<name>/')
-def band_connect(bracelet_name):
-    cmd = bytearray(('~' + 'G' + bracelet_name).encode('utf-8'))
+def band_connect(name):
+    cmd = bytearray(('~' + 'G' + name).encode('utf-8'))
     data_getter.ser.write(cmd)
-    tmp = ''
-    while tmp != b'GOK\r\n':
-        tmp = data_getter.ser.readline()
+    # tmp = ''
+    # while tmp != b'GOK\r\n':
+    #     tmp = data_getter.ser.readline()
     return 'OK'
 
 

@@ -121,7 +121,7 @@ class MioBandMod{
         }
     }
     band_connect(address){
-        return fetch("http://127.0.0.1:5000/band_connect/" + address.name + "/")
+        return fetch("http://127.0.0.1:5000/band_connect/" + address + "/")
 
     }
     usbport(){
