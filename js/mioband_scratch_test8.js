@@ -373,9 +373,9 @@ class MioPlatformMod{
                 {
                     "opcode": "platform_connect",
                     "blockType": "command",
-                    "text": "Подключиться к Платформе по адресу [adress]",
+                    "text": "Подключиться к Платформе по адресу [address]",
                     "arguments": {
-                        "adress": {
+                        "address": {
                             "type": "string"
                         },
                     }
