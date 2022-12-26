@@ -456,6 +456,9 @@ class MioPlatformMod{
         }
     }
     platform_connect(address){
+        console.log(address)
+        console.log(address.address)
+
         const url = new URL("http://127.0.0.1:5000/platform/connect/" +
             address.address + "/")
         return fetch(url).then(response => response.text())
