@@ -23,6 +23,10 @@ def test():
 @app.route('/band_connect/<name>/')
 def band_connect(bracelet_name):
     cmd = bytearray(('~' + 'G' + bracelet_name).encode('utf-8'))
+    data_getter.ser.write(cmd)
+    tmp = ''
+    while tmp != b'GOK\r\n':
+        tmp = data_getter.ser.readline()
     return 'OK'
 
 
@@ -194,6 +198,10 @@ def platform_connect(mac_address):
     cmd[1] = 0x48
     for i in range(2, 8):
         cmd[i] = mac_address[i - 2]
+    data_getter.ser.write(cmd)
+    tmp = ''
+    while tmp != b'HOK\r\n':
+        tmp = data_getter.ser.readline()
 
 
 @app.route('/platform/get_sensor/<num>/')
@@ -202,6 +210,7 @@ def get_sensor(num):
     cmd[0] = 0x7E  # ~
     cmd[1] = 0x49
     cmd[2] = int(num)
+    data_getter.ser.write(cmd)
 
 
 @app.route('/platform/move_to/<axis>/')
@@ -216,9 +225,10 @@ def move_to(axis):
     cmd[0] = 0x7E  # ~
     cmd[1] = 0x4D
     cmd[2] = mov_dir
+    data_getter.ser.write(cmd)
 
 
-@app.route('platform/turn_to/<axis>/')
+@app.route('/platform/turn_to/<axis>/')
 def turn_to(axis):
     if axis == 'Вправо':
         rot_dir = 0x3E
@@ -230,8 +240,10 @@ def turn_to(axis):
     cmd[0] = 0x7E  # ~
     cmd[1] = 0x52
     cmd[2] = rot_dir
+    data_getter.ser.write(cmd)
 
-@app.route('platform/move_and_turn_to/<axis>/')
+
+@app.route('/platform/move_and_turn_to/<axis>/')
 def move_and_turn_to(axis):
     if axis == 'Вперед-Влево':
         dir= 0x01
@@ -247,13 +259,17 @@ def move_and_turn_to(axis):
     cmd[0] = 0x7E  # ~
     cmd[1] = 0x4B
     cmd[2] = dir
+    data_getter.ser.write(cmd)
 
 
-@app.route('platform/stop_platform/')
+
+@app.route('/platform/stop_platform/')
 def stop_platform():
     cmd = bytearray(2)
     cmd[0] = 0x7E  # ~
     cmd[1] = 0x53
+    data_getter.ser.write(cmd)
+
 
 
 app.run()
