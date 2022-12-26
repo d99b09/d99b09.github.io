@@ -23,7 +23,8 @@ def test():
 @app.route('/band_connect/<name>/')
 def band_connect(name):
     cmd = bytearray(('~' + 'G' + name).encode('utf-8'))
-    data_getter.ser.write(cmd)
+    data_getter.band_connect(cmd)
+    # data_getter.ser.write(cmd)
     # tmp = ''
     # while tmp != b'GOK\r\n':
     #     tmp = data_getter.ser.readline()
@@ -191,17 +192,20 @@ def release():
     return 'OK'
 
 
-@app.route('/platform/connect/<address>/')
-def platform_connect(mac_address):
+@app.route('/platform/connect/<mac_address_str>/')
+def platform_connect(mac_address_str):#048198247176247028
+    mac_address = [int(item) for item in [mac_address_str[i:i + 3] for i in range(0, len(mac_address_str), 3)]]
     cmd = bytearray(8)
     cmd[0] = 0x7E  # ~
     cmd[1] = 0x48
     for i in range(2, 8):
         cmd[i] = mac_address[i - 2]
-    data_getter.ser.write(cmd)
-    tmp = ''
-    while tmp != b'HOK\r\n':
-        tmp = data_getter.ser.readline()
+    data_getter.band_connect(cmd)
+    # data_getter.ser.write(cmd)
+    # tmp = ''
+    # while tmp != b'HOK\r\n':
+    #     tmp = data_getter.ser.readline()
+    return 'OK'
 
 
 @app.route('/platform/get_sensor/<num>/')
@@ -211,6 +215,7 @@ def get_sensor(num):
     cmd[1] = 0x49
     cmd[2] = int(num)
     data_getter.ser.write(cmd)
+    return 'OK'
 
 
 @app.route('/platform/move_to/<axis>/')
@@ -226,6 +231,7 @@ def move_to(axis):
     cmd[1] = 0x4D
     cmd[2] = mov_dir
     data_getter.ser.write(cmd)
+    return 'OK'
 
 
 @app.route('/platform/turn_to/<axis>/')
@@ -241,6 +247,7 @@ def turn_to(axis):
     cmd[1] = 0x52
     cmd[2] = rot_dir
     data_getter.ser.write(cmd)
+    return 'OK'
 
 
 @app.route('/platform/move_and_turn_to/<axis>/')
@@ -260,6 +267,7 @@ def move_and_turn_to(axis):
     cmd[1] = 0x4B
     cmd[2] = dir
     data_getter.ser.write(cmd)
+    return 'OK'
 
 
 
@@ -269,6 +277,7 @@ def stop_platform():
     cmd[0] = 0x7E  # ~
     cmd[1] = 0x53
     data_getter.ser.write(cmd)
+    return 'OK'
 
 
 

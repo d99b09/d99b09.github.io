@@ -123,7 +123,6 @@ class MioBandMod{
     band_connect(address){
 
         const url = new URL("http://127.0.0.1:5000/band_connect/" + address.name + "/")
-
         return fetch(url).then(response => response.text())
 
     }
@@ -457,27 +456,34 @@ class MioPlatformMod{
         }
     }
     platform_connect(address){
-        return fetch("http://127.0.0.1:5000/platform/connect/" +
+        const url = new URL("http://127.0.0.1:5000/platform/connect/" +
             address.address + "/")
+        return fetch(url).then(response => response.text())
+
     }
     get_sensor(number){
-        return fetch("http://127.0.0.1:5000/platform/get_sensor/" +
+        const url = new URL("http://127.0.0.1:5000/platform/get_sensor/" +
             number.adress + "/")
+        return fetch(url).then(response => response.text())
     }
     move_to(axis){
-        return fetch("http://127.0.0.1:5000/platform/move_to/" +
+        const url = new URL("http://127.0.0.1:5000/platform/move_to/" +
             axis.axis + "/")
+        return fetch(url).then(response => response.text())
     }
     turn_to(axis){
-        return fetch("http://127.0.0.1:5000/platform/turn_to/" +
+        const url = new URL("http://127.0.0.1:5000/platform/turn_to/" +
             axis.axis + "/")
+        return fetch(url).then(response => response.text())
     }
     move_and_turn_to(axis){
-        return fetch("http://127.0.0.1:5000/platform/move_and_turn_to/" +
+        const url = new URL("http://127.0.0.1:5000/platform/move_and_turn_to/" +
             axis.axis1 + "-" + axis.axis2 + "/")
+        return fetch(url).then(response => response.text())
     }
     stop_platform(){
-        return fetch("http://127.0.0.1:5000/platform/stop_platform/")
+        const url = new URL("http://127.0.0.1:5000/platform/stop_platform/")
+        return fetch(url).then(response => response.text())
     }
 
 
