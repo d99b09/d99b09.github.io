@@ -163,7 +163,7 @@ class MioBandMod{
         const url = new URL("http://127.0.0.1:5000/get_data/")
         return fetch(url).then(async (response) => {
                 const data = await response.json();
-                return data.s > 0
+                return data.s > "0"
             })
     }
     // slantvalue(axis){
