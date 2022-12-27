@@ -48,9 +48,9 @@ def get_data():
 def is_slant(direction):
     msg = data_getter.decode_message
     print(direction)
-    if direction == 'вверх':
+    if direction == 'вниз':
         return json.dumps({'v': msg['y']})
-    elif direction == 'вниз':
+    elif direction == 'вверх':
         return json.dumps({'v': -msg['y']})
     elif direction == 'влево':
         return json.dumps({'v': -msg['x']})
@@ -64,9 +64,9 @@ def is_slant_dg(direction, dg):
     dg = int(dg)
     msg = data_getter.decode_message
     print(msg)
-    if direction == 'вверх':
+    if direction == 'вниз':
         return str(int(msg['y'] > dg))
-    elif direction == 'вниз':
+    elif direction == 'вверх':
         return str(int(msg['y'] < -dg))
     elif direction == 'влево':
         return str(int(msg['x'] < -dg))
@@ -78,9 +78,9 @@ def is_slant_dg(direction, dg):
 @app.route('/slant_value_d/<direction>/')
 def slant_value_d(direction):
     msg = data_getter.decode_message
-    if direction == 'вверх':
+    if direction == 'вниз':
         return str(msg['y']) if msg['y'] > 0 else str(0)
-    elif direction == 'вниз':
+    elif direction == 'вверх':
         return str(-msg['y']) if msg['y'] < 0 else str(0)
     elif direction == 'влево':
         return str(-msg['x']) if msg['x'] < 0 else str(0)
