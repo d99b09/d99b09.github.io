@@ -353,17 +353,28 @@ class MioPlatformMod{
                         },
                     }
                 },
-                // {
-                //     "opcode": "get_sensor",
-                //     "blockType": "reporter",
-                //     "text": "Показание УЗ датчика номер [address]",
-                //     "arguments": {
-                //         "address": {
-                //             "type": "string",
-                //             "menu": "sensorNumber"
-                //         },
-                //     }
-                // },
+                {
+                    "opcode": "get_us_sensor",
+                    "blockType": "reporter",
+                    "text": "Показание УЗ датчика номер [address]",
+                    "arguments": {
+                        "address": {
+                            "type": "string",
+                            "menu": "sensorNumber"
+                        },
+                    }
+                },
+                {
+                    "opcode": "get_ir_sensor",
+                    "blockType": "reporter",
+                    "text": "Показание ИК датчика номер [address]",
+                    "arguments": {
+                        "address": {
+                            "type": "string",
+                            "menu": "sensorNumber"
+                        },
+                    }
+                },
                 {
                     "opcode": "move_to",
                     "blockType": "command",
@@ -406,7 +417,28 @@ class MioPlatformMod{
                     "blockType": "command",
                     "text": "Остановить движение",
                 },
-
+                {
+                    "opcode": "light_turn",
+                    "blockType": "command",
+                    "text": "Свет [a]",
+                    "arguments": {
+                        "a": {
+                            "type": "string",
+                            "menu": "lightMenu"
+                        },
+                    }
+                },
+                {
+                    "opcode": "us_light_turn",
+                    "blockType": "command",
+                    "text": "УФ свет [a]",
+                    "arguments": {
+                        "a": {
+                            "type": "string",
+                            "menu": "lightMenu"
+                        },
+                    }
+                },
 
             ],
             "menus": {
@@ -425,6 +457,10 @@ class MioPlatformMod{
                     "Влево",
                     "Вправо"
                 ],
+                "lightMenu": [
+                    "Вкл",
+                    "Выкл"
+                ]
             }
         }
     }
@@ -435,8 +471,13 @@ class MioPlatformMod{
         return fetch(url).then(response => response.text())
 
     }
-    get_sensor(number){
-        const url = new URL("http://127.0.0.1:5000/platform/get_sensor/" +
+    get_us_sensor(number){
+        const url = new URL("http://127.0.0.1:5000/platform/get_us_sensor/" +
+            number.adress + "/")
+        return fetch(url).then(response => response.text())
+    }
+    get_ir_sensor(number){
+        const url = new URL("http://127.0.0.1:5000/platform/get_ir_sensor/" +
             number.adress + "/")
         return fetch(url).then(response => response.text())
     }
@@ -459,9 +500,16 @@ class MioPlatformMod{
         const url = new URL("http://127.0.0.1:5000/platform/stop_platform/")
         return fetch(url).then(response => response.text())
     }
-
-
-
+    light_turn(state){
+        const url = new URL("http://127.0.0.1:5000/platform/lights_turn/" +
+            state.a + "/")
+        return fetch(url).then(response => response.text())
+    }
+    light_turn(state){
+        const url = new URL("http://127.0.0.1:5000/platform/us_lights_turn/" +
+            state.a + "/")
+        return fetch(url).then(response => response.text())
+    }
 }
 
 (function() {

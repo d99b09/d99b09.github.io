@@ -22,7 +22,8 @@ def test():
 
 @app.route('/band_connect/<name>/')
 def band_connect(name):
-    cmd = bytearray(('~' + 'G' + name).encode('utf-8'))
+    # cmd = bytearray(('~' + 'G' + name).encode('utf-8'))
+    cmd = bytearray(('~' + 'G' + name + '$L\n').encode('utf-8'))
     data_getter.band_connect(cmd)
     # data_getter.ser.write(cmd)
     # tmp = ''
@@ -194,7 +195,10 @@ def release():
 
 @app.route('/platform/connect/<mac_address_str>/')
 def platform_connect(mac_address_str):#048198247176247028
-    mac_address = [int(item) for item in [mac_address_str[i:i + 3] for i in range(0, len(mac_address_str), 3)]]
+    # mac_address_s = 'A4:CF:12:44:E2:74'
+    mac_address = [int(x, base=16) for x in mac_address_str.split(':')]
+
+    # print(mac_address)
     cmd = bytearray(8)
     cmd[0] = 0x7E  # ~
     cmd[1] = 0x48
@@ -205,16 +209,6 @@ def platform_connect(mac_address_str):#048198247176247028
     # tmp = ''
     # while tmp != b'HOK\r\n':
     #     tmp = data_getter.ser.readline()
-    return 'OK'
-
-
-@app.route('/platform/get_sensor/<num>/')
-def get_sensor(num):
-    cmd = bytearray(3)
-    cmd[0] = 0x7E  # ~
-    cmd[1] = 0x49
-    cmd[2] = int(num)
-    data_getter.ser.write(cmd)
     return 'OK'
 
 
@@ -279,6 +273,35 @@ def stop_platform():
     data_getter.ser.write(cmd)
     return 'OK'
 
+
+@app.route('/platform/get_us_sensor/<numb>/')
+def get_us_sensor(numb):
+    return str(data_getter.get_us_sensor(int(numb)))
+
+
+@app.route('/platform/get_ir_sensor/<num>/')
+def get_ir_sensor(num):
+    return str(data_getter.get_ir_sensor(int(num)))
+
+
+@app.route('/platform/lights_turn/<state>/')
+def lights_turn(state):
+    if state == 'Вкл':
+        data_getter.turn_on_light()
+    else:
+        data_getter.turn_off_light()
+    data_getter.change_light()
+    return 'OK'
+
+
+@app.route('/platform/us_lights_turn/<state>/')
+def us_lights_turn(state):
+    if state == 'Вкл':
+        data_getter.turn_on_us()
+    else:
+        data_getter.turn_off_us()
+    data_getter.change_light()
+    return 'OK'
 
 
 app.run()

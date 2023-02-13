@@ -1,12 +1,12 @@
 import time
 
-from win32api import GetSystemMetrics
+# from win32api import GetSystemMetrics
 from threading import Thread
 from pynput.mouse import Button, Controller
 import serial.tools.list_ports
 
 MAX_MOUSE_SPEED = 20
-WIDTH_INCREASE = GetSystemMetrics(0) / GetSystemMetrics(1)
+WIDTH_INCREASE = 1#GetSystemMetrics(0) / GetSystemMetrics(1)
 DIFF_INCREASE = 4
 XY_LIMIT = 3
 
