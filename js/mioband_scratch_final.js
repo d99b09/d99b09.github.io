@@ -473,12 +473,12 @@ class MioPlatformMod{
     }
     get_us_sensor(number){
         const url = new URL("http://127.0.0.1:5000/platform/get_us_sensor/" +
-            number.adress + "/")
+            number.address + "/")
         return fetch(url).then(response => response.text())
     }
     get_ir_sensor(number){
         const url = new URL("http://127.0.0.1:5000/platform/get_ir_sensor/" +
-            number.adress + "/")
+            number.address + "/")
         return fetch(url).then(response => response.text())
     }
     move_to(axis){
@@ -505,7 +505,7 @@ class MioPlatformMod{
             state.a + "/")
         return fetch(url).then(response => response.text())
     }
-    light_turn(state){
+    us_light_turn(state){
         const url = new URL("http://127.0.0.1:5000/platform/us_lights_turn/" +
             state.a + "/")
         return fetch(url).then(response => response.text())
