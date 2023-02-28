@@ -7,12 +7,13 @@ import json
 class Mio_API_get_data(Thread):
     def __init__(self):
         super(Mio_API_get_data, self).__init__()
-        self.decode_RFID_message = [1 for _ in range(6)]
+        self.rfid = '00000'
+        self.decode_RFID_message = [0 for _ in range(6)]
         self.decode_sensor_message = [1 for _ in range(11)]
         self.last_msg = json.dumps({'x': 0, 'y': 0, 's': 0})
         self.is_open = False
         self.ser = serial.Serial()
-        self.ser.port = '/dev/cu.usbmodem8178D77417321'
+        self.ser.port = '/dev/cu.usbmodem6D79266749551'
         self.ser.baudrate = 115200
         self.msg = '0'
         self.sleep_time = 0
@@ -41,7 +42,10 @@ class Mio_API_get_data(Thread):
         elif i_list[0] == 73:
             self.decode_sensor_message = i_list
         elif i_list[0] == 70:
-            self.decode_RFID_message = i_list
+            s = ''
+            for i in range((len(i_list) - 1)):
+                s += str(i_list[i+1])
+            self.rfid = s
 
         return self.decode_message
 
@@ -123,6 +127,9 @@ class Mio_API_get_data(Thread):
 
     def turn_off_light(self):
         self.light_state = False
+        
+    def get_rfid(self):
+        return self.rfid
 
 
 
@@ -131,4 +138,6 @@ class Mio_API_get_data(Thread):
 if __name__ == '__main__':
     dater = Mio_API_get_data()
     dater.start()
-    dater.set_port('COM4')
+    time.sleep(3)
+    cmd = bytearray(('~' + 'G' + 'Bracelet_1' + '$L\n').encode('utf-8'))
+    dater.band_connect(cmd)

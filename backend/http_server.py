@@ -304,4 +304,21 @@ def us_lights_turn(state):
     return 'OK'
 
 
+@app.route('/platform/wheel_pair_speed/<pair>/<speed>/')
+def set_wheel_pair_speed(pair, speed):
+    wheel_pair = 0x4C if pair == 'левой' else 0x52
+    wheels_speed = int(speed) if int(speed) > 0 else 256 + int(speed)
+    cmd = bytearray(4)
+    cmd[0] = 0x7E  # ~
+    cmd[1] = 0x51
+    cmd[2] = wheel_pair
+    cmd[3] = wheels_speed
+    data_getter.ser.write(cmd)
+    return 'OK'
+
+
+@app.route('/platform/get_rfid/')
+def get_rfid():
+    return data_getter
+
 app.run()

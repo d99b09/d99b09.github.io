@@ -378,7 +378,7 @@ class MioPlatformMod{
                 {
                     "opcode": "move_to",
                     "blockType": "command",
-                    "text": "Ехать [axis]",
+                    "text": "Двигаться [axis]",
                     "arguments": {
                         "axis": {
                             "type": "string",
@@ -439,6 +439,26 @@ class MioPlatformMod{
                         },
                     }
                 },
+                {
+                    "opcode": "wheel_pair_speed",
+                    "blockType": "command",
+                    "text": "Задать [pair] колёс скорость [speed]%",
+                    "arguments": {
+                        "pair": {
+                            "type": "string",
+                            "menu": "pairMenu"
+                        },
+                        "speed": {
+                            "type": "number",
+                            "defaultValue": "0"
+                        }
+                    }
+                },
+                {
+                    "opcode": "get_rfid",
+                    "blockType": "report",
+                    "text": "Получить RFID",
+                },
 
             ],
             "menus": {
@@ -460,6 +480,10 @@ class MioPlatformMod{
                 "lightMenu": [
                     "Вкл",
                     "Выкл"
+                ],
+                "pairMenu": [
+                    "левой",
+                    "правой"
                 ]
             }
         }
@@ -508,6 +532,15 @@ class MioPlatformMod{
     us_light_turn(state){
         const url = new URL("http://127.0.0.1:5000/platform/us_lights_turn/" +
             state.a + "/")
+        return fetch(url).then(response => response.text())
+    }
+    wheel_pair_speed(state){
+        const url = new URL("http://127.0.0.1:5000/platform/wheel_pair_speed/" +
+            state.pair + "/" + pair.speed + "/")
+        return fetch(url).then(response => response.text())
+    }
+    get_rfid(){
+        const url = new URL("http://127.0.0.1:5000//platform/get_rfid/")
         return fetch(url).then(response => response.text())
     }
 }
