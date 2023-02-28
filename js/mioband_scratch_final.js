@@ -442,7 +442,7 @@ class MioPlatformMod{
                 {
                     "opcode": "wheel_pair_speed",
                     "blockType": "command",
-                    "text": "Задать [pair] колёс скорость [speed]%",
+                    "text": "Задать [pair] паре колёс скорость [speed]%",
                     "arguments": {
                         "pair": {
                             "type": "string",
@@ -456,7 +456,7 @@ class MioPlatformMod{
                 },
                 {
                     "opcode": "get_rfid",
-                    "blockType": "report",
+                    "blockType": "reporter",
                     "text": "Получить RFID",
                 },
 
