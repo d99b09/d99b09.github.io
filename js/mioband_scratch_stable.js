@@ -1,20 +1,3 @@
-console.log('hello')
-
-
-const mWebSocket = 'ws://localhost:5678';
-
-class WsMain{
-    constructor() {
-        this.test_msg = ''
-        websocket.onmessage = (...data) => {
-                this.test_msg = data[0].data
-                this.main_msg = JSON.parse(data[0].data)
-
-
-            };
-
-    }
-}
 class MioBandMod{
     constructor(runtime) {
         this.ifslant_V = false
@@ -41,6 +24,18 @@ class MioBandMod{
                     "opcode": "miobandstate",
                     "blockType": "reporter",
                     "text": "Состояние браслета",
+                },
+                {
+                    "opcode": "band_connect",
+                    "blockType": "command",
+                    "text": "Подключится к браслету под именем [address]",
+                    "arguments": {
+                        "address": {
+                            "type": "string",
+                            "defaultValue": ""
+                        }
+                    }
+
                 },
                 {
                     "opcode": "usbport",
@@ -78,7 +73,8 @@ class MioBandMod{
                             "menu": "directionMenu"
                         },
                         "dg": {
-                            "type": "string"
+                            "type": "number",
+                            "defaultValue": "0"
                         }
                     }
                 },
@@ -124,7 +120,12 @@ class MioBandMod{
             }
         }
     }
+    band_connect(address){
 
+        const url = new URL("http://127.0.0.1:5000/band_connect/" + address.address + "/")
+        return fetch(url).then(response => response.text())
+
+    }
     usbport(){
         const url = new URL("http://127.0.0.1:5000/ports/")
         return fetch(url).then(response => response.text())
@@ -138,33 +139,31 @@ class MioBandMod{
     miobandstate(){
         const url = new URL("http://127.0.0.1:5000/get_data/")
         this.test_msg = fetch(url).then(response => response.text())
-        console.log(this.test_msg)
-        console.log(this.test_msg.x)
         return this.test_msg
 
     }
 
     isslant(direction){
-        console.log('isslant')
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
-        this.isslant_msg = fetch(url).then(response => response.text())
-        console.log(this.isslant_msg)
-
-        console.log(this.isslant_msg.v)
-        return 200 < this.isslant_msg.v
+        return fetch(url).then(async (response) => {
+                const data = await response.json();
+                return data.v > 200
+            })
     }
 
     isslant_dg(direction){
-        console.log(direction)
         const url = new URL("http://127.0.0.1:5000/is_slant/" + direction.direction + "/")
-        this.isslant_dg_msg = fetch(url).then(response => response.text())
-        console.log(this.isslant_msg.v)
-        return "1" === this.isslant_dg_msg
+        return fetch(url).then(async (response) => {
+                const data = await response.json();
+                return data.v > direction.dg
+            })
     }
     isgesture(){
         const url = new URL("http://127.0.0.1:5000/get_data/")
-        this.test_msg = fetch(url).then(response => response.text())
-        return this.test_msg.s === "1"
+        return fetch(url).then(async (response) => {
+                const data = await response.json();
+                return data.s > 0
+            })
     }
     // slantvalue(axis){
     //     const url = new URL("http://127.0.0.1:5000/get_data/")
@@ -174,14 +173,12 @@ class MioBandMod{
     //     }
     //     else {return this.main_msg.x}
     // }
-    slantvalue_d(){
+    slantvalue_d(direction){
         const url = new URL("http://127.0.0.1:5000/slant_value_d/" + direction.direction + "/")
-        fetch(url)
-            .then(response => response.text())
-            .then((response) => {
-                this.slantvalue_d_msg = response
-                })
-        return "1" === this.slantvalue_d_msg
+        return fetch(url).then(async (response) => {
+                const data = await response.text();
+                return data
+            })
     }
 }
 
@@ -199,18 +196,6 @@ class MouseMod{
             "id": "MouseMod",
             "name": "MouseControl",
             "blocks": [
-                // {
-                //     "opcode": "moveMo",
-                //     "blockType": "command",
-                //     "text": "Двигать мышь [direction]",
-                //     "arguments": {
-                //         "direction": {
-                //             "type": "string",
-                //
-                //             "menu": "directionMenu"
-                //         }
-                //     }
-                // },
                 {
                     "opcode": "moveMouseBySpeed",
                     "blockType": "command",
@@ -219,21 +204,6 @@ class MouseMod{
                         "direction": {
                             "type": "string",
                             "menu": "directionMenu"
-                        },
-                        "speed": {
-                            "type": "number",
-                            "defaultValue": "0"
-                        }
-                    }
-                },
-                {
-                    "opcode": "moveMoBySpeed",
-                    "blockType": "command",
-                    "text": "Двигать мышь [axis] со скоростью [speed]",
-                    "arguments": {
-                        "axis": {
-                            "type": "string",
-                            "menu": "axisMenu"
                         },
                         "speed": {
                             "type": "number",
@@ -359,13 +329,233 @@ class MouseMod{
 
 }
 
+class MioPlatformMod{
+    constructor(runtime) {
+        this.clear();
+    }
+
+    clear() {
+        this.socket = null;
+    }
+
+    getInfo() {
+        return{
+            "id": "MioPlatformMod",
+            "name": "PlatformControl",
+            "blocks": [
+                {
+                    "opcode": "platform_connect",
+                    "blockType": "command",
+                    "text": "Подключиться к Платформе по адресу [address]",
+                    "arguments": {
+                        "address": {
+                            "type": "string"
+                        },
+                    }
+                },
+                {
+                    "opcode": "get_us_sensor",
+                    "blockType": "reporter",
+                    "text": "Показание УЗ датчика номер [address]",
+                    "arguments": {
+                        "address": {
+                            "type": "string",
+                            "menu": "sensorNumber"
+                        },
+                    }
+                },
+                {
+                    "opcode": "get_ir_sensor",
+                    "blockType": "reporter",
+                    "text": "Показание ИК датчика номер [address]",
+                    "arguments": {
+                        "address": {
+                            "type": "string",
+                            "menu": "sensorNumber"
+                        },
+                    }
+                },
+                {
+                    "opcode": "move_to",
+                    "blockType": "command",
+                    "text": "Двигаться [axis]",
+                    "arguments": {
+                        "axis": {
+                            "type": "string",
+                            "menu": "axisMenu1"
+                        },
+                    }
+                },
+                {
+                    "opcode": "turn_to",
+                    "blockType": "command",
+                    "text": "Повернуть на месте [axis]",
+                    "arguments": {
+                        "axis": {
+                            "type": "string",
+                            "menu": "axisMenu2"
+                        },
+                    }
+                },
+                {
+                    "opcode": "move_and_turn_to",
+                    "blockType": "command",
+                    "text": "Двигаться с поворотом [axis1] [axis2]",
+                    "arguments": {
+                        "axis1": {
+                            "type": "string",
+                            "menu": "axisMenu1"
+                        },
+                        "axis2": {
+                            "type": "string",
+                            "menu": "axisMenu2"
+                        },
+                    }
+                },
+                {
+                    "opcode": "stop_platform",
+                    "blockType": "command",
+                    "text": "Остановить движение",
+                },
+                {
+                    "opcode": "light_turn",
+                    "blockType": "command",
+                    "text": "Свет [a]",
+                    "arguments": {
+                        "a": {
+                            "type": "string",
+                            "menu": "lightMenu"
+                        },
+                    }
+                },
+                {
+                    "opcode": "us_light_turn",
+                    "blockType": "command",
+                    "text": "УФ свет [a]",
+                    "arguments": {
+                        "a": {
+                            "type": "string",
+                            "menu": "lightMenu"
+                        },
+                    }
+                },
+                {
+                    "opcode": "wheel_pair_speed",
+                    "blockType": "command",
+                    "text": "Задать [pair] паре колёс скорость [speed]%",
+                    "arguments": {
+                        "pair": {
+                            "type": "string",
+                            "menu": "pairMenu"
+                        },
+                        "speed": {
+                            "type": "number",
+                            "defaultValue": "0"
+                        }
+                    }
+                },
+                {
+                    "opcode": "get_rfid",
+                    "blockType": "reporter",
+                    "text": "Получить RFID",
+                },
+
+            ],
+            "menus": {
+                "sensorNumber": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ],
+                "axisMenu1": [
+                    "Вперед",
+                    "Назад"
+                ],
+                "axisMenu2": [
+                    "Влево",
+                    "Вправо"
+                ],
+                "lightMenu": [
+                    "Вкл",
+                    "Выкл"
+                ],
+                "pairMenu": [
+                    "левой",
+                    "правой"
+                ]
+            }
+        }
+    }
+    platform_connect(address){
+
+        const url = new URL("http://127.0.0.1:5000/platform/connect/" +
+            address.address + "/")
+        return fetch(url).then(response => response.text())
+
+    }
+    get_us_sensor(number){
+        const url = new URL("http://127.0.0.1:5000/platform/get_us_sensor/" +
+            number.address + "/")
+        return fetch(url).then(response => response.text())
+    }
+    get_ir_sensor(number){
+        const url = new URL("http://127.0.0.1:5000/platform/get_ir_sensor/" +
+            number.address + "/")
+        return fetch(url).then(response => response.text())
+    }
+    move_to(axis){
+        const url = new URL("http://127.0.0.1:5000/platform/move_to/" +
+            axis.axis + "/")
+        return fetch(url).then(response => response.text())
+    }
+    turn_to(axis){
+        const url = new URL("http://127.0.0.1:5000/platform/turn_to/" +
+            axis.axis + "/")
+        return fetch(url).then(response => response.text())
+    }
+    move_and_turn_to(axis){
+        const url = new URL("http://127.0.0.1:5000/platform/move_and_turn_to/" +
+            axis.axis1 + "-" + axis.axis2 + "/")
+        return fetch(url).then(response => response.text())
+    }
+    stop_platform(){
+        const url = new URL("http://127.0.0.1:5000/platform/stop_platform/")
+        return fetch(url).then(response => response.text())
+    }
+    light_turn(state){
+        const url = new URL("http://127.0.0.1:5000/platform/lights_turn/" +
+            state.a + "/")
+        return fetch(url).then(response => response.text())
+    }
+    us_light_turn(state){
+        const url = new URL("http://127.0.0.1:5000/platform/us_lights_turn/" +
+            state.a + "/")
+        return fetch(url).then(response => response.text())
+    }
+    wheel_pair_speed(state){
+        const url = new URL("http://127.0.0.1:5000/platform/wheel_pair_speed/" +
+            state.pair + "/" + state.speed + "/")
+        return fetch(url).then(response => response.text())
+    }
+    get_rfid(){
+        const url = new URL("http://127.0.0.1:5000/platform/get_rfid/")
+        return fetch(url).then(response => response.text())
+    }
+}
+
 (function() {
-    console.log('hello')
+    console.log('hello1')
     var extensionClass1 = MioBandMod
     var extensionClass2 = MouseMod
+    var extensionClass3 = MioPlatformMod
+
     if (typeof window === "undefined" || !window.vm) {
         Scratch.extensions.register(new extensionClass1())
         Scratch.extensions.register(new extensionClass2())
+        Scratch.extensions.register(new extensionClass3())
+
 
     }
     else {

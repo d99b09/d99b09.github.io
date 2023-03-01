@@ -21,6 +21,8 @@ class Mio_API_get_data(Thread):
         self.msg_whiting = False
         self.us_light_state = False
         self.light_state = False
+        self.rfid_last_time = time.time()
+
 
     def string_to_json(self, line):
         decode_line = line.decode()
@@ -45,6 +47,7 @@ class Mio_API_get_data(Thread):
             s = ''
             for i in range((len(i_list) - 1)):
                 s += str(i_list[i+1])
+            self.rfid_last_time = time.time()
             self.rfid = s
 
         return self.decode_message
@@ -70,6 +73,7 @@ class Mio_API_get_data(Thread):
                     #     self.msg_whiting = True
                     try:
                         message = self.string_to_json(line)
+                        self.delete_rfid()
                         msg = json.dumps(message)
                         # print(f'Messege:{msg}')
                         self.last_msg = msg
@@ -115,6 +119,10 @@ class Mio_API_get_data(Thread):
         cmd[2] = state
         print(state)
         self.ser.write(cmd)
+
+    def delete_rfid(self):
+        if self.rfid_last_time - time.time() > 3:
+            self.rfid = '00000'
 
     def turn_on_us(self):
         self.us_light_state = True

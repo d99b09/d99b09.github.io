@@ -536,11 +536,11 @@ class MioPlatformMod{
     }
     wheel_pair_speed(state){
         const url = new URL("http://127.0.0.1:5000/platform/wheel_pair_speed/" +
-            state.pair + "/" + pair.speed + "/")
+            state.pair + "/" + state.speed + "/")
         return fetch(url).then(response => response.text())
     }
     get_rfid(){
-        const url = new URL("http://127.0.0.1:5000//platform/get_rfid/")
+        const url = new URL("http://127.0.0.1:5000/platform/get_rfid/")
         return fetch(url).then(response => response.text())
     }
 }
