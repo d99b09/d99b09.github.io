@@ -1,9 +1,9 @@
 mioBandBlockIconURL = 'https://d99b09.github.io/scratch_icon/bracelet.svg'
 mioBandMenuIconURL ='https://d99b09.github.io/scratch_icon/bracelet.svg'
-mioMouseBlockIconURL = 'https://d99b09.github.io/scratch_icon/bracelet.svg'
-mioMouseMenuIconURL = 'https://d99b09.github.io/scratch_icon/bracelet.svg'
-mioPlatformBlockIconURL = 'https://d99b09.github.io/scratch_icon/bracelet.svg'
-mioPlatformMenuIconURL = 'https://d99b09.github.io/scratch_icon/bracelet.svg'
+mioMouseBlockIconURL = 'https://d99b09.github.io/scratch_icon/mouse.svg'
+mioMouseMenuIconURL = 'https://d99b09.github.io/scratch_icon/mouse.svg'
+mioPlatformBlockIconURL = 'https://d99b09.github.io/scratch_icon/robot.svg'
+mioPlatformMenuIconURL = 'https://d99b09.github.io/scratch_icon/robot.svg'
 
 class MioBandMod{
     constructor(runtime) {
