@@ -1,3 +1,10 @@
+mioBandBlockIconURL = 'https://d99b09.github.io/scratch_icon/bracelet.svg'
+mioBandMenuIconURL ='https://d99b09.github.io/scratch_icon/bracelet.svg'
+mioMouseBlockIconURL = 'https://d99b09.github.io/scratch_icon/bracelet.svg'
+mioMouseMenuIconURL = 'https://d99b09.github.io/scratch_icon/bracelet.svg'
+mioPlatformBlockIconURL = 'https://d99b09.github.io/scratch_icon/bracelet.svg'
+mioPlatformMenuIconURL = 'https://d99b09.github.io/scratch_icon/bracelet.svg'
+
 class MioBandMod{
     constructor(runtime) {
         this.ifslant_V = false
@@ -20,6 +27,8 @@ class MioBandMod{
         return{
             "id": "MioBandMod",
             "name": "MioBand",
+            "blockIconURI": mioBandBlockIconURL,
+            "menuIconURI": mioBandMenuIconURL,
             "blocks": [{
                     "opcode": "miobandstate",
                     "blockType": "reporter",
@@ -195,6 +204,8 @@ class MouseMod{
         return{
             "id": "MouseMod",
             "name": "MouseControl",
+            "blockIconURI": mioBandBlockIconURL,
+            "menuIconURI": mioBandMenuIconURL,
             blockIconURI: blockIconURI,
             menuIconURI: menuIconURI,
             "blocks": [
@@ -344,6 +355,8 @@ class MioPlatformMod{
         return{
             "id": "MioPlatformMod",
             "name": "PlatformControl",
+            "blockIconURI": mioBandBlockIconURL,
+            "menuIconURI": mioBandMenuIconURL,
             "blocks": [
                 {
                     "opcode": "platform_connect",
