@@ -2,54 +2,28 @@
 <html lang="en">
     <head>
         <title>Fetch demo</title>
+         window.onload = playSound
+
     </head>
     <body>
         <div id="wst">
             "text"
+            <a href="#" onclick="playAudio()">Play Audio</a>
         </div>
         <script>
-            var json = ''
-            async function getJSON(url){
-                let response = await fetch(url);
-                json = await response.json();
-                console.log(json)
-                return json
-            }
-            function test(url){
-                return getJSON(url).then((data) => {return data})
-            }
 
-            // // const websocket = new WebSocket("ws://localhost:5678/");
-            // // websocket.onmessage = (...data) => {
-            // //     var fieldNameElement = document.getElementById('wst');
-            // //     fieldNameElement.innerHTML = data[0].data;
-            // //     console.log(data[0].data)
-            // //     var d = JSON.parse(data[0].data)
-            // //     console.log(d)
-            // //     console.log(d.x)
-            // //     console.log(d.y)
-            // //     console.log(d.s)
-            // //     console.log(1 == "1")
-            //
-            // const url = new URL("http://127.0.0.1:5000/")
-            // console.log(fetch(url).then(response => response.text()))
-            const url = new URL("http://127.0.0.1:5000/is_slant/up/")
-            fetch(url).then(async (response) => {
-                const data = await response.json();
-                console.log(data)
-            })
+            async function playAudio() {
+                var audio = new Audio('https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav');
+                audio.type = 'audio/wav';
 
+                try {
+                    await audio.play();
+                    console.log('Playing...');
+                } catch (err) {
+                    console.log('Failed to play...' + err);
+                }
+}
 
-
-
-
-
-        //     console.log( "1" == fetch(url).then((response) => response.text()))
-        //
-        //     console.log( "1" === fetch(url).then((response) => response.text()))
-        //
-        //
-        // console.log(1 == "1")
 
 
 

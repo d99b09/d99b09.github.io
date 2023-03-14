@@ -5,12 +5,14 @@ import serial
 import json
 
 from backend.mio_data import Mio_API_get_data
+from backend.mio_test_data import Mio_API_get_test_data
 from mouse_control import Mio_API_control
 
 app = Flask(__name__)
 CORS(app)
 mouse = Mio_API_control()
-data_getter = Mio_API_get_data()
+#data_getter = Mio_API_get_data()
+data_getter = Mio_API_get_test_data()
 mouse.start()
 data_getter.start()
 
