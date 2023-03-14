@@ -204,10 +204,8 @@ class MouseMod{
         return{
             "id": "MouseMod",
             "name": "MouseControl",
-            "blockIconURI": mioBandBlockIconURL,
-            "menuIconURI": mioBandMenuIconURL,
-            blockIconURI: blockIconURI,
-            menuIconURI: menuIconURI,
+            "blockIconURI": mioMouseBlockIconURL,
+            "menuIconURI": mioMouseBlockIconURL,
             "blocks": [
                 {
                     "opcode": "moveMouseBySpeed",
@@ -355,8 +353,8 @@ class MioPlatformMod{
         return{
             "id": "MioPlatformMod",
             "name": "PlatformControl",
-            "blockIconURI": mioBandBlockIconURL,
-            "menuIconURI": mioBandMenuIconURL,
+            "blockIconURI": mioPlatformBlockIconURL,
+            "menuIconURI": mioPlatformBlockIconURL,
             "blocks": [
                 {
                     "opcode": "platform_connect",
