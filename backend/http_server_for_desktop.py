@@ -4,15 +4,15 @@ from threading import Thread
 import serial
 import json
 
-from backend.mio_data import Mio_API_get_data
-# from backend.mio_test_data import Mio_API_get_test_data
+# from backend.mio_data import Mio_API_get_data
+from backend.mio_test_data import Mio_API_get_test_data
 from mouse_control import Mio_API_control
 
 app = Flask(__name__)
 CORS(app)
 mouse = Mio_API_control()
-data_getter = Mio_API_get_data()
-# data_getter = Mio_API_get_test_data()
+# data_getter = Mio_API_get_data()
+data_getter = Mio_API_get_test_data()
 mouse.start()
 data_getter.start()
 
@@ -47,19 +47,25 @@ def get_data():
     return data_getter.get_last_msg()
 
 
+@app.route('/get_data/is_gesture/')
+def is_gesture():
+    gesture = json.loads(data_getter.get_last_msg())
+    return str(gesture['s'])
+
+
 @app.route('/is_slant/<direction>/')
 def is_slant(direction):
     msg = data_getter.decode_message
     print(direction)
     if direction == 'вниз':
-        return json.dumps({'v': msg['y']})
+        result = json.dumps({'v': msg['y']})
     elif direction == 'вверх':
-        return json.dumps({'v': -msg['y']})
+        result = json.dumps({'v': -msg['y']})
     elif direction == 'влево':
-        return json.dumps({'v': -msg['x']})
+        result = json.dumps({'v': -msg['x']})
     elif direction == 'вправо':
-        return json.dumps({'v': msg['x']})
-    return direction  # data_getter.get_last_msg()
+        result = json.dumps({'v': msg['x']})
+    return str(json.loads(result)['v'])
 
 
 @app.route('/is_slant_dg/<direction>/<dg>/')
@@ -104,6 +110,10 @@ def get_ports():
     for port, _, _ in sorted(ports):
         port_str += port + ' '
     return port_str[:-1]
+
+# @app.route('/noslant/')
+# def noslant():
+#     if
 
 
 @app.route('/move_mouse/')
@@ -321,6 +331,6 @@ def set_wheel_pair_speed(pair, speed):
 
 @app.route('/platform/get_rfid/')
 def get_rfid():
-    return data_getter
+    return data_getter.get_rfid()
 
 app.run()

@@ -366,32 +366,21 @@ class MioPlatformMod{
                         },
                     }
                 },
-                {
-                    "opcode": "get_us_sensor",
-                    "blockType": "reporter",
-                    "text": "УЗ датчик [address]",
-                    "arguments": {
-                        "address": {
-                            "type": "string",
-                            "menu": "sensorNumber"
-                        },
-                    }
-                },
-                {
-                    "opcode": "get_ir_sensor",
-                    "blockType": "reporter",
-                    "text": "ИК датчик [address]",
-                    "arguments": {
-                        "address": {
-                            "type": "string",
-                            "menu": "sensorNumber"
-                        },
-                    }
-                },
+                // {
+                //     "opcode": "get_sensor",
+                //     "blockType": "reporter",
+                //     "text": "Показание УЗ датчика номер [address]",
+                //     "arguments": {
+                //         "address": {
+                //             "type": "string",
+                //             "menu": "sensorNumber"
+                //         },
+                //     }
+                // },
                 {
                     "opcode": "move_to",
                     "blockType": "command",
-                    "text": "Двигаться [axis]",
+                    "text": "Ехать [axis]",
                     "arguments": {
                         "axis": {
                             "type": "string",
@@ -430,48 +419,7 @@ class MioPlatformMod{
                     "blockType": "command",
                     "text": "Остановить движение",
                 },
-                {
-                    "opcode": "light_turn",
-                    "blockType": "command",
-                    "text": "Свет [a]",
-                    "arguments": {
-                        "a": {
-                            "type": "string",
-                            "menu": "lightMenu"
-                        },
-                    }
-                },
-                {
-                    "opcode": "us_light_turn",
-                    "blockType": "command",
-                    "text": "УФ свет [a]",
-                    "arguments": {
-                        "a": {
-                            "type": "string",
-                            "menu": "lightMenu"
-                        },
-                    }
-                },
-                {
-                    "opcode": "wheel_pair_speed",
-                    "blockType": "command",
-                    "text": "Задать [pair] паре колёс скорость [speed]%",
-                    "arguments": {
-                        "pair": {
-                            "type": "string",
-                            "menu": "pairMenu"
-                        },
-                        "speed": {
-                            "type": "number",
-                            "defaultValue": "0"
-                        }
-                    }
-                },
-                {
-                    "opcode": "get_rfid",
-                    "blockType": "reporter",
-                    "text": "Получить RFID",
-                },
+
 
             ],
             "menus": {
@@ -490,14 +438,6 @@ class MioPlatformMod{
                     "Влево",
                     "Вправо"
                 ],
-                "lightMenu": [
-                    "Вкл",
-                    "Выкл"
-                ],
-                "pairMenu": [
-                    "левой",
-                    "правой"
-                ]
             }
         }
     }
@@ -508,14 +448,9 @@ class MioPlatformMod{
         return fetch(url).then(response => response.text())
 
     }
-    get_us_sensor(number){
-        const url = new URL("http://127.0.0.1:5000/platform/get_us_sensor/" +
-            number.address + "/")
-        return fetch(url).then(response => response.text())
-    }
-    get_ir_sensor(number){
-        const url = new URL("http://127.0.0.1:5000/platform/get_ir_sensor/" +
-            number.address + "/")
+    get_sensor(number){
+        const url = new URL("http://127.0.0.1:5000/platform/get_sensor/" +
+            number.adress + "/")
         return fetch(url).then(response => response.text())
     }
     move_to(axis){
@@ -537,25 +472,9 @@ class MioPlatformMod{
         const url = new URL("http://127.0.0.1:5000/platform/stop_platform/")
         return fetch(url).then(response => response.text())
     }
-    light_turn(state){
-        const url = new URL("http://127.0.0.1:5000/platform/lights_turn/" +
-            state.a + "/")
-        return fetch(url).then(response => response.text())
-    }
-    us_light_turn(state){
-        const url = new URL("http://127.0.0.1:5000/platform/us_lights_turn/" +
-            state.a + "/")
-        return fetch(url).then(response => response.text())
-    }
-    wheel_pair_speed(state){
-        const url = new URL("http://127.0.0.1:5000/platform/wheel_pair_speed/" +
-            state.pair + "/" + state.speed + "/")
-        return fetch(url).then(response => response.text())
-    }
-    get_rfid(){
-        const url = new URL("http://127.0.0.1:5000/platform/get_rfid/")
-        return fetch(url).then(response => response.text())
-    }
+
+
+
 }
 
 (function() {
