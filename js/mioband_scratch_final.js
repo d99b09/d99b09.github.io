@@ -356,7 +356,7 @@ class MioPlatformMod{
                 {
                     "opcode": "get_us_sensor",
                     "blockType": "reporter",
-                    "text": "Показание УЗ датчика номер [address]",
+                    "text": "УЗ датчик [address]",
                     "arguments": {
                         "address": {
                             "type": "string",
@@ -367,7 +367,7 @@ class MioPlatformMod{
                 {
                     "opcode": "get_ir_sensor",
                     "blockType": "reporter",
-                    "text": "Показание ИК датчика номер [address]",
+                    "text": "ИК датчик [address]",
                     "arguments": {
                         "address": {
                             "type": "string",
