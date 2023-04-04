@@ -4,15 +4,15 @@ from threading import Thread
 import serial
 import json
 
-from backend.mio_data import Mio_API_get_data
-# from backend.mio_test_data import Mio_API_get_test_data
+# from backend.mio_data import Mio_API_get_data
+from backend.mio_test_data import Mio_API_get_test_data
 from mouse_control import Mio_API_control
 
 app = Flask(__name__)
 CORS(app)
 mouse = Mio_API_control()
-data_getter = Mio_API_get_data()
-# data_getter = Mio_API_get_test_data()
+# data_getter = Mio_API_get_data()
+data_getter = Mio_API_get_test_data()
 mouse.start()
 data_getter.start()
 
@@ -321,6 +321,6 @@ def set_wheel_pair_speed(pair, speed):
 
 @app.route('/platform/get_rfid/')
 def get_rfid():
-    return data_getter
+    return data_getter.get_rfid()
 
 app.run()

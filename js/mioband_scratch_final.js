@@ -391,7 +391,7 @@ class MioPlatformMod{
                 {
                     "opcode": "move_to",
                     "blockType": "command",
-                    "text": "Двигаться [axis]",
+                        "text": "Двигаться [axis]",
                     "arguments": {
                         "axis": {
                             "type": "string",
