@@ -183,13 +183,15 @@ def move_mouse_right():
 @app.route('/move_mouse_by_speed/<pair>/<speed>/')
 def move_mouse_by_speed(pair, speed):
     if pair == 'Вверх':
-        mouse.y = int(speed)
-    elif pair == 'Вниз':
         mouse.y = -int(speed)
+    elif pair == 'Вниз':
+        mouse.y = int(speed)
     elif pair == 'Влево':
         mouse.x = -int(speed)
     elif pair == 'Вправо':
         mouse.x = int(speed)
+    mouse.rotation_by_speed()
+    return 'OK'
 
 
 @app.route('/one_click/')

@@ -43,6 +43,7 @@ class Mio_API_get_data(Thread):
             print(f'Заряд:{i_list[2]}%')
         elif i_list[0] == 73:
             self.decode_sensor_message = i_list
+            print(f'len:{self.decode_sensor_message}')
         elif i_list[0] == 70:
             s = ''
             for i in range((len(i_list) - 1)):
