@@ -153,32 +153,43 @@ def move_mouse_right():
     return 'OK'
 
 
-@app.route('/move_mouse_by_speed/up/<speed>/')
-def move_mouse_up_by_speed(speed):
-    mouse.y = int(speed)
-    mouse.rotation_by_speed()
-    return 'OK'
+# @app.route('/move_mouse_by_speed/up/<speed>/')
+# def move_mouse_up_by_speed(speed):
+#     mouse.y = int(speed)
+#     mouse.rotation_by_speed()
+#     return 'OK'
+#
+#
+# @app.route('/move_mouse_by_speed/down/<speed>/')
+# def move_mouse_down_by_speed(speed):
+#     mouse.y = -int(speed)
+#     mouse.rotation_by_speed()
+#     return 'OK'
+#
+#
+# @app.route('/move_mouse_by_speed/left/<speed>/')
+# def move_mouse_left_by_speed(speed):
+#     mouse.x = -int(speed)
+#     mouse.rotation_by_speed()
+#     return 'OK'
+#
+#
+# @app.route('/move_mouse_by_speed/right/<speed>/')
+# def move_mouse_right_by_speed(speed):
+#     mouse.x = int(speed)
+#     mouse.rotation_by_speed()
+#     return 'OK'
 
-
-@app.route('/move_mouse_by_speed/down/<speed>/')
-def move_mouse_down_by_speed(speed):
-    mouse.y = -int(speed)
-    mouse.rotation_by_speed()
-    return 'OK'
-
-
-@app.route('/move_mouse_by_speed/left/<speed>/')
-def move_mouse_left_by_speed(speed):
-    mouse.x = -int(speed)
-    mouse.rotation_by_speed()
-    return 'OK'
-
-
-@app.route('/move_mouse_by_speed/right/<speed>/')
-def move_mouse_right_by_speed(speed):
-    mouse.x = int(speed)
-    mouse.rotation_by_speed()
-    return 'OK'
+@app.route('/move_mouse_by_speed/<pair>/<speed>/')
+def move_mouse_by_speed(pair, speed):
+    if pair == 'Вверх':
+        mouse.y = int(speed)
+    elif pair == 'Вниз':
+        mouse.y = -int(speed)
+    elif pair == 'Влево':
+        mouse.x = -int(speed)
+    elif pair == 'Вправо':
+        mouse.x = int(speed)
 
 
 @app.route('/one_click/')
@@ -319,7 +330,7 @@ def us_lights_turn(state):
 @app.route('/platform/wheel_pair_speed/<pair>/<speed>/')
 def set_wheel_pair_speed(pair, speed):
     wheel_pair = 0x4C if pair == 'левой' else 0x52
-    wheels_speed = int(speed) if int(speed) > 0 else 256 + int(speed)
+    wheels_speed = int(speed) if int(speed) >= 0 else 256 + int(speed)
     cmd = bytearray(4)
     cmd[0] = 0x7E  # ~
     cmd[1] = 0x51

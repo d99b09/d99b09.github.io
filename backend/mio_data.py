@@ -7,7 +7,7 @@ import json
 class Mio_API_get_data(Thread):
     def __init__(self):
         super(Mio_API_get_data, self).__init__()
-        self.rfid = '00000'
+        self.rfid = '0 0 0 0 0'
         self.decode_RFID_message = [0 for _ in range(6)]
         self.decode_sensor_message = [1 for _ in range(11)]
         self.last_msg = json.dumps({'x': 0, 'y': 0, 's': 0})
@@ -47,8 +47,10 @@ class Mio_API_get_data(Thread):
             s = ''
             for i in range((len(i_list) - 1)):
                 s += str(i_list[i+1])
+                s += ' '
+            print(f'rfid:{s}')
             self.rfid_last_time = time.time()
-            self.rfid = s
+            self.rfid = str(s)
 
         return self.decode_message
 
@@ -122,7 +124,7 @@ class Mio_API_get_data(Thread):
 
     def delete_rfid(self):
         if self.rfid_last_time - time.time() > 3:
-            self.rfid = '00000'
+            self.rfid = '0 0 0 0 0'
 
     def turn_on_us(self):
         self.us_light_state = True

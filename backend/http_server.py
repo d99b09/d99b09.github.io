@@ -4,15 +4,15 @@ from threading import Thread
 import serial
 import json
 
-# from backend.mio_data import Mio_API_get_data
-from backend.mio_test_data import Mio_API_get_test_data
+from backend.mio_data import Mio_API_get_data
+# from backend.mio_test_data import Mio_API_get_test_data
 from mouse_control import Mio_API_control
 
 app = Flask(__name__)
 CORS(app)
 mouse = Mio_API_control()
-# data_getter = Mio_API_get_data()
-data_getter = Mio_API_get_test_data()
+data_getter = Mio_API_get_data()
+# data_getter = Mio_API_get_test_data()
 mouse.start()
 data_getter.start()
 
@@ -309,7 +309,7 @@ def us_lights_turn(state):
 @app.route('/platform/wheel_pair_speed/<pair>/<speed>/')
 def set_wheel_pair_speed(pair, speed):
     wheel_pair = 0x4C if pair == 'левой' else 0x52
-    wheels_speed = int(speed) if int(speed) > 0 else 256 + int(speed)
+    wheels_speed = int(speed) if int(speed) >= 0 else 256 + int(speed)
     cmd = bytearray(4)
     cmd[0] = 0x7E  # ~
     cmd[1] = 0x51
