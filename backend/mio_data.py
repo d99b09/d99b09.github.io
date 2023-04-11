@@ -26,7 +26,7 @@ class Mio_API_get_data(Thread):
 
     def string_to_json(self, line):
         decode_line = line.decode()
-        s_list = decode_line.split(',')[:-1]
+        s_list = decode_line.split(',')#[:-1]
         i_list = []
         for i in s_list:
             try:
@@ -42,8 +42,16 @@ class Mio_API_get_data(Thread):
             # self.band_control.config.left_band.power = i_list[2]
             print(f'Заряд:{i_list[2]}%')
         elif i_list[0] == 73:
+            # s_list = decode_line.split(',')  # [:-1]
+            # i_list = []
+            # for i in s_list:
+            #     try:
+            #         i_list.append(int(i))
+            #     except:
+            #         pass
             self.decode_sensor_message = i_list
             print(f'len:{self.decode_sensor_message}')
+
         elif i_list[0] == 70:
             s = ''
             for i in range((len(i_list) - 1)):
