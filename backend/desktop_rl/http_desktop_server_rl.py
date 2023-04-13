@@ -4,15 +4,15 @@ from threading import Thread
 import serial
 import json
 
-from backend.mio_data import Mio_API_get_data
+from backend.desktop_rl.mio_data_rl import Mio_API_get_data
 from backend.mio_test_data import Mio_API_get_test_data
-from mouse_control import Mio_API_control
+from backend.mouse_control import Mio_API_control
 
 app = Flask(__name__)
 CORS(app)
 mouse = Mio_API_control()
-# data_getter = Mio_API_get_data()
-data_getter = Mio_API_get_test_data()
+# data_getter = Mio_API_get_test_data()
+data_getter = Mio_API_get_data()
 mouse.start()
 data_getter.start()
 
@@ -34,6 +34,7 @@ def band_connect(name):
     return 'OK'
 
 
+
 @app.route('/set_port/<com>/')
 def port_connect(com):
     print(com)
@@ -41,20 +42,20 @@ def port_connect(com):
     return 'OK'
 
 
-@app.route('/get_data/')
-def get_data():
-    return data_getter.get_last_msg()
+@app.route('/get_data/<rl>/')
+def get_data(rl):
+    return data_getter.get_last_msg_rl(rl)
 
 
-@app.route('/get_data/is_gesture/')
-def is_gesture():
-    gesture = json.loads(data_getter.get_last_msg())
+@app.route('/get_data/is_gesture/<rl>/')
+def is_gesture(rl):
+    gesture = json.loads(data_getter.get_last_msg_rl(rl))
     return str(bool(gesture['s']))
 
 
-@app.route('/is_slant/<direction>/')
-def is_slant(direction):
-    msg = data_getter.decode_message
+@app.route('/is_slant/<direction>/<rl>/')
+def is_slant(direction, rl):
+    msg = data_getter.get_decode_message_rl(rl)
     print(direction)
     if direction == 'вниз':
         result = json.dumps({'v': msg['y']})
@@ -67,10 +68,10 @@ def is_slant(direction):
     return str(json.loads(result)['v'])
 
 
-@app.route('/is_slant_dg/<direction>/<dg>/')
-def is_slant_dg(direction, dg):
+@app.route('/is_slant_dg/<direction>/<dg>/<rl>/')
+def is_slant_dg(direction, dg, rl):
     dg = int(dg)
-    msg = data_getter.decode_message
+    msg = data_getter.get_decode_message_rl(rl)
     print(msg)
     if direction == 'вниз':
         return str(msg['y'] > dg)
@@ -85,9 +86,12 @@ def is_slant_dg(direction, dg):
     return dg  # data_getter.get_last_msg()
 
 
-@app.route('/slant_value_d/<direction>/')
-def slant_value_d(direction):
-    msg = data_getter.decode_message
+@app.route('/slant_value_d/<direction>/<rl>/')
+def slant_value_d(direction, rl):
+    if rl == 'l':
+        msg = data_getter.get_last_msg_rl('l')
+    else:
+        msg = data_getter.get_decode_message_rl('r')
     if direction == 'вниз':
         return str(msg['y']) if msg['y'] > 0 else str(0)
     elif direction == 'вверх':

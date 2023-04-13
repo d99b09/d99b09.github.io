@@ -23,8 +23,8 @@ class Mio_API_get_test_data(Thread):
 
     def run(self) -> None:
         while True:
-            self.test_tact({'x': 0, 'y': 0, 's': 0}, 0.1)
-            self.test_tact({'x': 800, 'y': 0, 's': 0}, 0.1)
+            self.test_tact({'x': 0, 'y': 0, 's': 0}, 1)
+            self.test_tact({'x': 800, 'y': 300, 's': 1}, 1)
 
 
 
