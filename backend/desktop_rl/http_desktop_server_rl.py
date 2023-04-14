@@ -88,10 +88,7 @@ def is_slant_dg(direction, dg, rl):
 
 @app.route('/slant_value_d/<direction>/<rl>/')
 def slant_value_d(direction, rl):
-    if rl == 'l':
-        msg = data_getter.get_last_msg_rl('l')
-    else:
-        msg = data_getter.get_decode_message_rl('r')
+    msg = data_getter.get_decode_message_rl(rl)
     if direction == 'вниз':
         return str(msg['y']) if msg['y'] > 0 else str(0)
     elif direction == 'вверх':

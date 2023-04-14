@@ -111,7 +111,7 @@ class Mio_API_get_data(Thread):
                 self.ser.close()
 
     def get_last_msg_rl(self, rl: str):
-        if rl == 'l':
+        if rl == 'L':
             return self.last_msg_l
         else:
             return self.last_msg_r
@@ -120,9 +120,9 @@ class Mio_API_get_data(Thread):
         self.ser.port = port
 
     def get_decode_message_rl(self, rl):
-        if rl == 'l':
+        if rl == 'L':
             return self.decode_message_l
-        elif rl == 'r':
+        else:
             return self.decode_message_r
 
     def band_connect(self, cmd):
