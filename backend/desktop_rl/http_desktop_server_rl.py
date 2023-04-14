@@ -224,7 +224,10 @@ def release():
 @app.route('/platform/connect/<mac_address_str>/')
 def platform_connect(mac_address_str):#048198247176247028
     # mac_address_s = 'A4:CF:12:44:E2:74'
-    mac_address = [int(x, base=16) for x in mac_address_str.split(':')]
+    try:
+        mac_address = [int(x, base=16) for x in mac_address_str.split(':')]
+    except:
+        return 'Error'
 
     # print(mac_address)
     cmd = bytearray(8)
