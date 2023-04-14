@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from threading import Thread
 import serial
+import serial.tools.list_ports
 import json
 
 from backend.desktop_rl.mio_data_rl import Mio_API_get_data
