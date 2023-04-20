@@ -352,4 +352,70 @@ def set_wheel_pair_speed(pair, speed):
 def get_rfid():
     return data_getter.get_rfid()
 
+
+@app.route('/droneball/set_flight_mode/<mode>/')
+def set_flight_mode(mode):
+    return 'OK'
+
+
+@app.route('/droneball/get_flight_mode/')
+def get_flight_mode():
+    mode = 'mode'
+    return mode
+
+
+@app.route('/droneball/set_angle/<axis>/<value>/')
+def set_angle(axis, value):
+    return 'OK'
+
+
+@app.route('/droneball/get_angle/')
+def get_angle():
+    angle = 'angle'
+    return angle
+
+
+@app.route('/droneball/set_yaw_speed/<value>/')
+def set_yaw_speed(value):
+    return 'OK'
+
+
+@app.route('/droneball/set_althold_speed/<axis>/<value>/')
+def set_althold_speed(axis, value):
+    return 'OK'
+
+
+@app.route('/droneball/get_height/')
+def get_height():
+    height = ''
+    return height
+
+
+@app.route('/droneball/angle_mod_speed/<value>/')
+def angle_mod_speed(value):
+    return 'OK'
+
+
+@app.route('/droneball/get_distance/')
+def get_distance():
+    distance = ''
+    return distance
+
+
+@app.route('/droneball/set_motor_speed/<motor>/<speed>/')
+def set_motor_speed(motor, speed):
+    return 'OK'
+
+
+@app.route('/droneball/get_motor_speed/<motor>/<speed>/')
+def get_motor_speed():
+    speed = 'speed'
+    return speed
+
+
+
+
+
+
+
 app.run()
