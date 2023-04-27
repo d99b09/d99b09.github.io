@@ -5,6 +5,7 @@ import serial
 import serial.tools.list_ports
 import json
 
+from backend.desktop_rl.game_data import Game_data
 from backend.desktop_rl.mio_data_rl import Mio_API_get_data
 from backend.mio_test_data import Mio_API_get_test_data
 from backend.mouse_control import Mio_API_control
@@ -14,6 +15,7 @@ CORS(app)
 mouse = Mio_API_control()
 # data_getter = Mio_API_get_test_data()
 data_getter = Mio_API_get_data()
+game_data = Game_data()
 mouse.start()
 data_getter.start()
 
@@ -355,64 +357,77 @@ def get_rfid():
 
 @app.route('/droneball/set_flight_mode/<mode>/')
 def set_flight_mode(mode):
+    game_data.set_mode(mode)
     return 'OK'
 
 
 @app.route('/droneball/get_flight_mode/')
 def get_flight_mode():
-    mode = 'mode'
-    return mode
+    return game_data.get_mode()
 
 
-@app.route('/droneball/set_angle/<axis>/<value>/')
-def set_angle(axis, value):
+@app.route('/droneball/set_roll_pitch_yaw/<axis>/<value>/')
+def set_roll_pitch_yaw(axis, value):
+    game_data.set_rpy(axis, value)
     return 'OK'
 
 
-@app.route('/droneball/get_angle/')
-def get_angle():
-    angle = 'angle'
-    return angle
+@app.route('/droneball/get_roll_pitch_yaw/<axis>/')
+def get_roll_pitch_yaw(axis):
+    return game_data.get_rpy(axis)
 
 
-@app.route('/droneball/set_yaw_speed/<value>/')
-def set_yaw_speed(value):
-    return 'OK'
+# @app.route('/droneball/set_yaw_speed/<value>/')
+# def set_yaw_speed(value):
+#     return 'OK'
 
 
 @app.route('/droneball/set_althold_speed/<axis>/<value>/')
 def set_althold_speed(axis, value):
+    if axis == 'Набирать':
+        game_data.set_althold(value)
+    else:
+        game_data.set_althold(-value)
     return 'OK'
 
 
 @app.route('/droneball/get_height/')
 def get_height():
-    height = ''
+    height = game_data.get_height()
     return height
 
 
-@app.route('/droneball/angle_mod_speed/<value>/')
-def angle_mod_speed(value):
+@app.route('/droneball/set_angle_mod_speed/<value>/')
+def set_angle_mod_speed(value):
+    game_data.set_angle(value)
     return 'OK'
 
 
 @app.route('/droneball/get_distance/')
 def get_distance():
-    distance = ''
+    distance = game_data.get_dist()
     return distance
 
 
 @app.route('/droneball/set_motor_speed/<motor>/<speed>/')
 def set_motor_speed(motor, speed):
+    game_data.set_motor_speed(motor, speed)
     return 'OK'
 
 
-@app.route('/droneball/get_motor_speed/<motor>/<speed>/')
-def get_motor_speed():
-    speed = 'speed'
+@app.route('/droneball/get_motor_speed/<motor>/')
+def get_motor_speed(motor):
+    speed = game_data.get_motor_speed(motor)
     return speed
 
 
+@app.route('/droneball/game/get_info/')
+def get_info_droneball():
+    return game_data.get_info()
+
+@app.route('/droneball/game/height_dist_post/<height>/<dist>/')
+def height_dist_post(height, dist):
+    game_data.set_height_dist(height, dist)
 
 
 
