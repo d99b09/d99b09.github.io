@@ -44,17 +44,17 @@ class Game_data:
         if rpy == 'Roll':
             self.roll = value
         elif rpy == 'Pitch':
-            self.roll = value
+            self.pitch = value
         elif rpy == 'Yaw':
             self.yaw = value
 
     def get_rpy(self, rpy):
         if rpy == 'Roll':
-            return self.roll
+            return str(self.roll)
         elif rpy == 'Pitch':
-            return self.roll
+            return str(self.pitch)
         elif rpy == 'Yaw':
-            return self.yaw
+            return str(self.yaw)
 
     def set_althold(self, value):
         self.althold = value

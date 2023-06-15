@@ -358,6 +358,7 @@ def get_rfid():
 @app.route('/droneball/set_flight_mode/<mode>/')
 def set_flight_mode(mode):
     game_data.set_mode(mode)
+    # print(game_data.get_info())
     return 'OK'
 
 
@@ -369,6 +370,7 @@ def get_flight_mode():
 @app.route('/droneball/set_roll_pitch_yaw/<axis>/<value>/')
 def set_roll_pitch_yaw(axis, value):
     game_data.set_rpy(axis, value)
+    # print(game_data.get_info())
     return 'OK'
 
 
@@ -387,7 +389,8 @@ def set_althold_speed(axis, value):
     if axis == 'Набирать':
         game_data.set_althold(value)
     else:
-        game_data.set_althold(-value)
+        game_data.set_althold('-'+value)
+    # print(game_data.get_info())
     return 'OK'
 
 
@@ -400,6 +403,7 @@ def get_height():
 @app.route('/droneball/set_angle_mod_speed/<value>/')
 def set_angle_mod_speed(value):
     game_data.set_angle(value)
+    # print(game_data.get_info())
     return 'OK'
 
 
@@ -412,6 +416,7 @@ def get_distance():
 @app.route('/droneball/set_motor_speed/<motor>/<speed>/')
 def set_motor_speed(motor, speed):
     game_data.set_motor_speed(motor, speed)
+    print(game_data.get_info())
     return 'OK'
 
 
@@ -428,6 +433,9 @@ def get_info_droneball():
 @app.route('/droneball/game/height_dist_post/<height>/<dist>/')
 def height_dist_post(height, dist):
     game_data.set_height_dist(height, dist)
+    # print(game_data.get_dist())
+    # print(game_data.get_height())
+    return 'OK'
 
 
 
