@@ -31,8 +31,8 @@ class Game_data:
         return json.dumps(info)
 
     def set_height_dist(self, height, dist):
-        self.height = height
-        self.dist = dist
+        self.height = int(height) / 100
+        self.dist = int(dist) / 100
 
     def set_mode(self, mode):
         self.mode = mode
